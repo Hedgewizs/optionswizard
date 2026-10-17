@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Greeks — OptionsWizard</title>
+<meta name="description" content="Delta, Gamma, Theta, Vega, Rho explained in plain language: what each Greek measures, typical values, and how premium sellers and buyers actually use them.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="options-basics.html">Basics</a>
+      <a href="strategies.html">Playbook</a>
+      <a href="greeks.html" class="active">Greeks</a>
+      <a href="rules.html">Rules</a>
+      <a href="metrics.html">Metrics</a>
+      <a href="mistakes.html">Mistakes</a>
+      <span class="lang-switch"><a href="greeks.html" class="on">EN</a><a href="tw/greeks.html">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>The Greeks</h1>
+    <p>Five numbers that describe how an option's price responds to the world. They look like math — they're really just <em>measurements</em>, like a speedometer and a fuel gauge. Learn what each one measures and you'll understand every strategy on this site at a deeper level. Intuition first, formulas never.</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Delta (Δ) — Directional Exposure</h2>
+    <p class="section-sub"><strong>What it measures:</strong> how much the option's price moves when the stock moves $1.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Typical values</h3>
+        <p>Calls: <strong>0 to +1.00</strong>. Puts: <strong>0 to −1.00</strong>. A 0.40-delta call gains about $0.40 ($40 per contract) for each $1 the stock rises. Deep ITM options approach ±1.00; far OTM options approach 0.</p>
+        <p><strong>Example:</strong> XYZ at $100. The $105 call shows delta 0.35 — if XYZ ticks to $101, the call should gain roughly $0.35.</p>
+      </div>
+      <div class="card">
+        <h3>High vs low</h3>
+        <p><strong>High delta</strong> (near ±1.00) = behaves almost like the stock itself — expensive, stock-like, small leverage. <strong>Low delta</strong> (near 0) = barely reacts to the stock — cheap lottery tickets that usually expire worthless.</p>
+      </div>
+    </div>
+    <div class="callout tip"><strong class="k">How sellers use it:</strong> delta doubles as a <strong>probability proxy</strong> — 16 delta ≈ 16% chance of finishing in the money. That's why the flagship setup sells the 16s: it's the market's own one-standard-deviation line. Sellers also sum position deltas (beta-weighted to SPY) to keep the whole portfolio roughly direction-neutral. <strong>How buyers use it:</strong> delta is your directional horsepower and your hedge ratio — a 0.50-delta call behaves like owning 50 shares per contract.</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>Gamma (Γ) — Delta's Accelerator</h2>
+    <p class="section-sub"><strong>What it measures:</strong> how fast <em>delta itself</em> changes when the stock moves $1.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Typical values</h3>
+        <p>Gamma is always positive for long options (0 to ~0.15+ for most equity options). It's <strong>highest for at-the-money options</strong> and grows as expiration approaches.</p>
+        <p><strong>Example:</strong> an ATM call with delta 0.50 and gamma 0.08: if the stock rises $1, delta becomes ~0.58 — the option is now <em>more</em> sensitive. Another $1 up, delta ~0.66. Acceleration compounds.</p>
+      </div>
+      <div class="card">
+        <h3>High vs low</h3>
+        <p><strong>High gamma</strong> = delta whipsaws with every tick — the position's risk profile is unstable. <strong>Low gamma</strong> = delta barely budges; the position behaves predictably.</p>
+      </div>
+    </div>
+    <div class="callout warn"><strong class="k" style="color:var(--red);">Why sellers fear it — the gamma explosion:</strong> in the final ~21 days, gamma on short-dated options <strong>explodes</strong>. A short strangle that was calmly delta-neutral can go deeply directional on a single 2% move, with losses accelerating the further it runs. This is the mechanical reason for the <strong>21-DTE rule</strong>: close or roll before you enter the gamma danger zone. Sellers collect theta; they <em>pay</em> gamma. Never hold short premium into expiration week.</div>
+    <div class="callout tip"><strong class="k">How buyers use it:</strong> long gamma is the buyer's superpower — it means your winners accelerate and your delta grows <em>into</em> the move. Day-traders and event speculators buy short-dated ATM options precisely to rent high gamma.</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Theta (Θ) — Time Decay</h2>
+    <p class="section-sub"><strong>What it measures:</strong> how much the option's price erodes per day, all else equal.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Typical values</h3>
+        <p>Quoted as a daily dollar amount per share. Long options have <strong>negative</strong> theta (they bleed); short options have <strong>positive</strong> theta (they earn).</p>
+        <p><strong>Example:</strong> a call priced at $3.00 with theta −0.06 loses about $0.06 per share per day — <strong>$6 per contract per day</strong> — just for existing. Hold it a month doing nothing and time alone eats ~$180.</p>
+      </div>
+      <div class="card">
+        <h3>High vs low</h3>
+        <p><strong>High absolute theta</strong> = fast bleed (or fast income). Theta <strong>accelerates near expiration</strong> — the last 30 days decay far faster than the first 30. <strong>Low theta</strong> = long-dated options, where each day barely matters.</p>
+      </div>
+    </div>
+    <div class="callout tip"><strong class="k">How sellers use it:</strong> theta is the seller's <strong>paycheck</strong> — the literal daily income for renting out risk. Every strategy on this site is, at bottom, a theta-harvesting machine: collect premium, let time erode what you owe, buy it back cheaper. <strong>How buyers use it:</strong> theta is your daily rent. If you buy options, you need the stock to move <em>enough, fast enough</em> to outrun the bleed — which is why buyers favor high-gamma, event-driven setups and keep holding periods short.</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>Vega (ν) — Volatility Sensitivity</h2>
+    <p class="section-sub"><strong>What it measures:</strong> how much the option's price moves when implied volatility (IV) moves 1 point.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Typical values</h3>
+        <p>Always positive for long options. <strong>Longer-dated and ATM options have the highest vega</strong>; short-dated OTM options have little.</p>
+        <p><strong>Example:</strong> a 45-DTE strangle with vega 0.20 per leg: if IV drops 5 points after an event passes quietly, each leg loses ~$1.00 — <strong>$200 per strangle</strong> — from volatility crush alone, even if the stock never moves.</p>
+      </div>
+      <div class="card">
+        <h3>High vs low</h3>
+        <p><strong>High vega</strong> = the position lives or dies on volatility expectations — great when you're right about vol, brutal when you're wrong. <strong>Low vega</strong> = vol changes barely register; the trade is about price and time.</p>
+      </div>
+    </div>
+    <div class="callout tip"><strong class="k">How sellers use it:</strong> vega is why the system only sells when <strong>IV Rank is above 50</strong>. High IV means rich premiums <em>and</em> high vega — when volatility inevitably mean-reverts lower, vega hands sellers a second profit engine on top of theta. This double tailwind (time + falling vol) is the core edge of premium selling. <strong>How buyers use it:</strong> buy vega when IV is <em>low</em> and you expect a volatility event — cheap lottery tickets before the storm. Never buy rich vega into a known event: the post-event "IV crush" routinely vaporizes option buyers even when they guess the direction right.</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Rho (ρ) — Interest-Rate Sensitivity</h2>
+    <p class="section-sub"><strong>What it measures:</strong> how much the option's price moves when interest rates move 1%.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Typical values</h3>
+        <p>Small for most retail trades. Positive for calls, negative for puts — higher rates make calls slightly more valuable and puts slightly less.</p>
+        <p><strong>Example:</strong> a 45-DTE ATM call might have rho 0.03 — a full 1% rate hike moves it $0.03. Barely a rounding error next to a normal day's stock move.</p>
+      </div>
+      <div class="card">
+        <h3>When it matters</h3>
+        <p>Rho only becomes material on <strong>long-dated options (LEAPS)</strong> and deep ITM positions held for many months. For 21–60 DTE premium selling, you can safely ignore it — it's included here so you know it exists, not because you'll trade on it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>The Greeks at a Glance</h2>
+    <p class="section-sub">One table. Tape it to your monitor.</p>
+    <table class="data">
+      <thead><tr><th>Greek</th><th>Measures</th><th>Seller wants</th><th>Buyer wants</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Delta (Δ)</strong></td><td>Price move per $1 stock move</td><td>Low, stable deltas (16Δ strikes); portfolio near delta-neutral</td><td>High delta for directional punch (or low delta for cheap lottery tickets)</td></tr>
+        <tr><td><strong>Gamma (Γ)</strong></td><td>How fast delta changes</td><td><strong>Low</strong> — exit by 21 DTE before gamma explodes</td><td><strong>High</strong> — ATM, short-dated; acceleration into the move</td></tr>
+        <tr><td><strong>Theta (Θ)</strong></td><td>Daily time decay</td><td><strong>Positive and large</strong> — it's the income</td><td>As close to zero as possible — or accept it as event-rental cost</td></tr>
+        <tr><td><strong>Vega (ν)</strong></td><td>Price move per 1pt IV move</td><td><strong>High when selling</strong> — sell rich IV, profit as it falls</td><td><strong>Buy when IV is low</strong>; beware IV crush after events</td></tr>
+        <tr><td><strong>Rho (ρ)</strong></td><td>Price move per 1% rate move</td><td colspan="2" style="text-align:center;color:var(--muted);">Negligible for 21–60 DTE trades; matters for LEAPS</td></tr>
+      </tbody>
+    </table>
+    <div class="callout"><strong class="k" style="color:var(--gold);">Beyond the big five:</strong> second-order Greeks exist — Vanna, Volga, Charm, Vomma and friends measure how the Greeks themselves interact (e.g. how delta changes as <em>volatility</em> moves). Market makers live in that world. You don't need it to start: Delta, Gamma, Theta, and Vega cover ~95% of practical retail decisions.</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Where to Go Next</h2>
+    <p class="section-sub">The Greeks turn the strategies from recipes into understanding:</p>
+    <div class="grid grid-3">
+      <div class="card"><h3>♟ The Playbook</h3><p>Nine premium-selling structures — now re-read them and watch how each one is really a bet on specific Greeks.</p><a href="strategies.html">Open the Playbook →</a></div>
+      <div class="card"><h3>📊 The Metrics</h3><p>IV Rank, expected move, POP — the dashboard that tells you <em>when</em> the Greeks are priced in your favor.</p><a href="metrics.html">Learn the metrics →</a></div>
+      <div class="card"><h3>📏 The Rules</h3><p>Sixteen mechanical rules — including the 21-DTE exit that exists because of gamma.</p><a href="rules.html">Read the rules →</a></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>Disclaimer:</strong> OptionsWizard is an educational resource only — not financial advice, and not a recommendation to buy or sell any security. Options trading involves substantial risk of loss, including the possible loss of more than your initial investment, and is not suitable for every investor. Past strategy performance does not guarantee future results. Consult a qualified financial professional before trading.</div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a><a href="options-basics.html">Basics</a><a href="strategies.html">Playbook</a><a href="greeks.html">Greeks</a><a href="rules.html">Rules</a><a href="metrics.html">Metrics</a><a href="mistakes.html">Mistakes</a><a href="tw/index.html">中文版</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard. Trade the odds, not the opinion.</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>希臘字母 — OptionsWizard</title>
+<meta name="description" content="Delta、Gamma、Theta、Vega、Rho 白話解釋：每個希臘字母衡量什麼、典型數值範圍，以及賣方與買方在實戰中怎麼用它們。">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="選單">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">首頁</a>
+      <a href="options-basics.html">入門</a>
+      <a href="strategies.html">策略</a>
+      <a href="greeks.html" class="active">希臘字母</a>
+      <a href="rules.html">規則</a>
+      <a href="metrics.html">指標</a>
+      <a href="mistakes.html">誤區</a>
+      <span class="lang-switch"><a href="../greeks.html">EN</a><a href="greeks.html" class="on">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>希臘字母</h1>
+    <p>五個數字，描述選擇權價格如何回應這個世界。看起來像數學，其實只是「測量儀表」 — 像時速表和油量表。搞懂每個字母在量什麼，本站每個策略你都會看得更深。先講直覺，絕不堆公式。</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Delta — 方向曝險</h2>
+    <p class="section-sub"><strong>衡量什麼：</strong>股價每動 $1，選擇權價格跟著動多少。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>典型數值</h3>
+        <p>買權：<strong>0 到 +1.00</strong>；賣權：<strong>0 到 −1.00</strong>。Delta 0.40 的買權，股價漲 $1，選擇權約漲 $0.40（一口 $40）。深度價內接近 ±1.00；深度價外接近 0。</p>
+        <p><strong>例子：</strong>XYZ 股價 $100，履約價 $105 的買權 Delta 0.35 — 股價漲到 $101，買權理論上漲約 $0.35。</p>
+      </div>
+      <div class="card">
+        <h3>高低代表什麼</h3>
+        <p><strong>高 Delta</strong>（接近 ±1.00）＝ 走勢幾乎跟股票一樣 — 貴、像股票、槓桿小。<strong>低 Delta</strong>（接近 0）＝ 股價動了它幾乎不動 — 便宜的樂透，通常到期歸零。</p>
+      </div>
+    </div>
+    <div class="callout tip"><strong class="k">賣方怎麼用：</strong>Delta 兼任<strong>機率 proxy</strong> — 16 Delta ≈ 到期時仍在價內的機率約 16%。旗艦策略賣 16 Delta 就是這個道理：那是市場自己畫的一個標準差線。賣方還會把所有部位的 Delta（對 SPY 做 Beta 加權）加總，讓整體帳戶接近方向中性。<strong>買方怎麼用：</strong>Delta 是你的方向馬力，也是避險比例 — Delta 0.50 的買權，一口約等於持有 50 股。</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>Gamma — Delta 的加速器</h2>
+    <p class="section-sub"><strong>衡量什麼：</strong>股價每動 $1，<em>Delta 本身</em>變化多快。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>典型數值</h3>
+        <p>買進的選擇權 Gamma 永遠為正（多數股票選擇權約 0 到 0.15+）。<strong>價平選擇權的 Gamma 最高</strong>，而且越接近到期越大。</p>
+        <p><strong>例子：</strong>價平買權 Delta 0.50、Gamma 0.08：股價漲 $1，Delta 變成約 0.58 — 選擇權變得<em>更</em>敏感。再漲 $1，Delta 約 0.66。加速是會複利的。</p>
+      </div>
+      <div class="card">
+        <h3>高低代表什麼</h3>
+        <p><strong>高 Gamma</strong> ＝ Delta 隨每個 tick 劇烈擺動 — 部位的風險結構不穩定。<strong>低 Gamma</strong> ＝ Delta 幾乎不動，部位表現可預測。</p>
+      </div>
+    </div>
+    <div class="callout warn"><strong class="k" style="color:var(--red);">賣方為什麼怕它 — Gamma 爆炸：</strong>到期前約 21 天內，短天期選擇權的 Gamma 會<strong>爆炸</strong>。原本 Delta 中性的賣出勒式，可能因為單日 2% 的波動就變成重度方向曝險，而且越跑虧損加速越快。這就是 <strong>21 DTE 規則</strong>的機械化理由：別踏進 Gamma 危險區，時間到就出場或轉倉。賣方賺的是 Theta，付的是 Gamma 的學費 — 絕對不要把賣方部位抱進到期週。</div>
+    <div class="callout tip"><strong class="k">買方怎麼用：</strong>高 Gamma 是買方的超能力 — 順風時 Delta 越長越大、加速追著行情跑。當沖客和事件投機者買短天期價平選擇權，就是在租高 Gamma。</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Theta — 時間價值損耗</h2>
+    <p class="section-sub"><strong>衡量什麼：</strong>其他條件不變，每天選擇權價格被時間吃掉多少。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>典型數值</h3>
+        <p>以「每天每股多少錢」表示。買進的選擇權 Theta 為<strong>負</strong>（每天失血）；賣出的選擇權 Theta 為<strong>正</strong>（每天進帳）。</p>
+        <p><strong>例子：</strong>一口買權價格 $3.00、Theta −0.06 — 每天光是放著就賠約 $0.06，一口一天 <strong>$6</strong>。抱一個月什麼都不做，時間就吃掉約 $180。</p>
+      </div>
+      <div class="card">
+        <h3>高低代表什麼</h3>
+        <p><strong>Theta 絕對值大</strong> ＝ 失血快（或進帳快）。Theta <strong>越接近到期加速越快</strong> — 最後 30 天的損耗遠快於前 30 天。<strong>Theta 小</strong> ＝ 長天期選擇權，每天幾乎無感。</p>
+      </div>
+    </div>
+    <div class="callout tip"><strong class="k">賣方怎麼用：</strong>Theta 是賣方的<strong>薪水</strong> — 出租風險的每日收入。本站每個策略歸根究柢都是 Theta 收割機：收權利金、讓時間侵蝕你欠的價值、再用更便宜的價格買回。<strong>買方怎麼用：</strong>Theta 是你的日租金。買選擇權，股價必須「動得夠大、夠快」才能跑贏失血 — 所以買方偏好高 Gamma 的事件型布局，而且持有期都很短。</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>Vega — 波動率敏感度</h2>
+    <p class="section-sub"><strong>衡量什麼：</strong>隱含波動率（IV）每變動 1 個點，選擇權價格變動多少。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>典型數值</h3>
+        <p>買進的選擇權 Vega 永遠為正。<strong>長天期、價平的選擇權 Vega 最高</strong>；短天期價外的 Vega 很小。</p>
+        <p><strong>例子：</strong>45 天期勒式，每隻腳 Vega 0.20：事件平靜落幕、IV 掉 5 個點，每隻腳光是波動率崩跌就賠約 $1.00 — 整組勒式 <strong>$200</strong> 蒸發，股價根本沒動。</p>
+      </div>
+      <div class="card">
+        <h3>高低代表什麼</h3>
+        <p><strong>高 Vega</strong> ＝ 部位的生死看波動率預期 — 看對賺翻，看錯重傷。<strong>低 Vega</strong> ＝ 波動率變化幾乎無感，這筆交易玩的是價格和時間。</p>
+      </div>
+    </div>
+    <div class="callout tip"><strong class="k">賣方怎麼用：</strong>Vega 是系統堅持「IV Rank 高於 50 才賣」的理由。高 IV 代表權利金肥<strong>而且</strong> Vega 大 — 波動率均值回歸下跌時，Vega 在 Theta 之外再送賣方第二台印鈔機。時間＋波動率下跌的雙引擎，就是賣方策略的核心優勢。<strong>買方怎麼用：</strong>IV <em>低</em>、預期有波動事件時買 Vega — 風暴前的便宜樂透。千萬別在已知事件前買貴 Vega：事件後的「IV 崩跌」經常讓買方方向看對還照樣賠光。</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Rho — 利率敏感度</h2>
+    <p class="section-sub"><strong>衡量什麼：</strong>利率每變動 1%，選擇權價格變動多少。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>典型數值</h3>
+        <p>對多數散戶交易微不足道。買權為正、賣權為負 — 利率上升，買權小漲、賣權小跌。</p>
+        <p><strong>例子：</strong>45 天期價平買權 Rho 約 0.03 — 利率整整升 1%，它只動 $0.03。跟日常股價波動比起來連零頭都算不上。</p>
+      </div>
+      <div class="card">
+        <h3>什麼時候重要</h3>
+        <p>只有<strong>長天期選擇權（LEAPS）</strong>和持有數月的深度價內部位，Rho 才值得一看。21–60 天期的賣方交易可以直接忽略 — 這裡列出來是讓你知道它存在，不是叫你拿它做交易。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>希臘字母總表</h2>
+    <p class="section-sub">一張表，印出來貼螢幕旁邊。</p>
+    <table class="data">
+      <thead><tr><th>希臘字母</th><th>衡量</th><th>賣方想要</th><th>買方想要</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Delta</strong></td><td>股價動 $1，選擇權動多少</td><td>低且穩定的 Delta（16 Delta 履約價）；整體帳戶接近 Delta 中性</td><td>高 Delta 追求方向爆發力（或低 Delta 買便宜樂透）</td></tr>
+        <tr><td><strong>Gamma</strong></td><td>Delta 變化多快</td><td><strong>越低越好</strong> — 21 DTE 前出場，躲開 Gamma 爆炸</td><td><strong>越高越好</strong> — 價平、短天期，順風加速</td></tr>
+        <tr><td><strong>Theta</strong></td><td>每天的時間損耗</td><td><strong>正且越大越好</strong> — 那是收入</td><td>越接近零越好 — 或當作事件租金認賠</td></tr>
+        <tr><td><strong>Vega</strong></td><td>IV 動 1 點，選擇權動多少</td><td><strong>賣出時越高越好</strong> — 賣貴 IV，等它回落獲利</td><td><strong>IV 低時買進</strong>；小心事件後的 IV 崩跌</td></tr>
+        <tr><td><strong>Rho</strong></td><td>利率動 1%，選擇權動多少</td><td colspan="2" style="text-align:center;color:var(--muted);">21–60 天期交易可忽略；長天期 LEAPS 才重要</td></tr>
+      </tbody>
+    </table>
+    <div class="callout"><strong class="k" style="color:var(--gold);">五大之外的世界：</strong>還有二階希臘字母 — Vanna、Volga、Charm、Vomma 等，衡量希臘字母彼此之間的交互作用（例如波動率變動時 Delta 怎麼變）。造市商活在那個世界。你不需要：Delta、Gamma、Theta、Vega 已經涵蓋散戶實戰約九成五的決策。</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>下一步去哪裡</h2>
+    <p class="section-sub">希臘字母讓策略從食譜變成理解：</p>
+    <div class="grid grid-3">
+      <div class="card"><h3>♟ 策略手冊</h3><p>九種賣方結構 — 現在回去重讀，你會發現每一種本質上都是在對特定希臘字母下注。</p><a href="strategies.html">開啟策略手冊 →</a></div>
+      <div class="card"><h3>📊 關鍵指標</h3><p>IV Rank、預期波動區間、獲利機率 — 告訴你「何時」希臘字母站在你這邊的儀表板。</p><a href="metrics.html">學習指標 →</a></div>
+      <div class="card"><h3>📏 交易規則</h3><p>十六條機械化規則 — 包括那條因為 Gamma 而存在的 21 DTE 出場規則。</p><a href="rules.html">閱讀規則 →</a></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>免責聲明：</strong>OptionsWizard 僅為教育性質的內容，不構成任何投資建議，也不推薦買賣任何證券。選擇權交易涉及重大虧損風險（可能損失超過原始投入金額），並不適合每一位投資人。過去的策略績效不保證未來結果。交易前請諮詢合格的專業人士。</div>
+    <nav class="footer-nav">
+      <a href="index.html">首頁</a><a href="options-basics.html">入門</a><a href="strategies.html">策略</a><a href="greeks.html">希臘字母</a><a href="rules.html">規則</a><a href="metrics.html">指標</a><a href="mistakes.html">誤區</a><a href="../index.html">English</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard。交易機率，不交易觀點。</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

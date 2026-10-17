@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>選擇權入門 — OptionsWizard</title>
+<meta name="description" content="從零開始學選擇權：合約是什麼、買權與賣權、履約價/到期日/權利金、價內價平價外、買方與賣方、內含價值與時間價值、指派與履約，以及為什麼要交易選擇權。">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="選單">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">首頁</a>
+      <a href="options-basics.html" class="active">入門</a>
+      <a href="strategies.html">策略</a>
+      <a href="greeks.html">希臘字母</a>
+      <a href="rules.html">規則</a>
+      <a href="metrics.html">指標</a>
+      <a href="mistakes.html">誤區</a>
+      <span class="lang-switch"><a href="../options-basics.html">EN</a><a href="options-basics.html" class="on">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>選擇權入門</h1>
+    <p>第一次接觸選擇權？從這裡開始。從「選擇權到底是什麼」一路講到策略手冊裡的每個名詞 — 用簡單的 $100 股票例子，不預設任何基礎。</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>選擇權合約是什麼</h2>
+    <p class="section-sub">選擇權是一紙合約：<strong>買方</strong>付錢，取得在到期日之前、用約定價格買進或賣出股票的<strong>「權利」</strong> — 注意，是權利，<strong>不是義務</strong>。買方付的這筆錢叫做<strong>權利金</strong>，歸<strong>賣方</strong>所有。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>買方</h3>
+        <p>付權利金，拿到<strong>權利</strong>：可以用約定價格買（買權）或賣（賣權）。最大虧損就是付出去的權利金 — 怎麼賠都不會超過當初投入的金額。</p>
+      </div>
+      <div class="card">
+        <h3>賣方</h3>
+        <p>收權利金，扛起<strong>義務</strong>：買方一旦要求履約，賣方必須照約定成交。賣方的獲利上限就是收到的權利金 — 但虧損可能大得多。</p>
+      </div>
+    </div>
+    <div class="callout tip"><strong class="k">關鍵細節：</strong>一口標準選擇權合約代表 <strong>100 股</strong>股票。所以權利金報價 $2.50，實際一口是 $2.50 × 100 = <strong>$250</strong>。永遠記得乘以 100。</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>買權 vs 賣權</h2>
+    <p class="section-sub">選擇權只有兩種。本站所有的策略，都是這兩種的組合。</p>
+    <div class="grid grid-2">
+      <div class="card strategy-card">
+        <h3>買權（Call）— 買進的權利</h3>
+        <p>買權買方付錢，取得在到期前用履約價<strong>買進</strong> 100 股的權利。股價上漲，買權就變值錢。</p>
+        <p><strong>例子：</strong>XYZ 股價 $100。你花 $2.00（共 $200）買進履約價 $105 的買權。如果 XYZ 漲到 $115，你用 $105 買進的權利至少值 $10 — 合約變成 $1,000 以上。如果 XYZ 沒漲過 $105，買權到期歸零，你賠掉 $200。</p>
+      </div>
+      <div class="card strategy-card">
+        <h3>賣權（Put）— 賣出的權利</h3>
+        <p>賣權買方付錢，取得在到期前用履約價<strong>賣出</strong> 100 股的權利。股價下跌，賣權就變值錢。</p>
+        <p><strong>例子：</strong>XYZ 股價 $100。你花 $2.00（共 $200）買進履約價 $95 的賣權。如果 XYZ 跌到 $85，你用 $95 賣出的權利至少值 $10 — 合約變成 $1,000 以上。如果 XYZ 沒跌破 $95，賣權到期歸零，你賠掉 $200。</p>
+      </div>
+    </div>
+    <div class="callout gold"><strong class="k">記憶法：</strong>「Call」是把股票「叫」到自己手上（看漲）；「Put」是把股票「丟」給別人（看跌）。而每種選擇權的<strong>賣方</strong>站在對面：買權賣方收錢、承擔「賣出」股票的義務；賣權賣方收錢、承擔「買進」股票的義務。</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>三個關鍵要素</h2>
+    <p class="section-sub">每口選擇權由三個數字定義。任一個變動，價格就跟著變。</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>履約價（Strike）</h3>
+        <p>買方可以買進（買權）或賣出（賣權）的約定價格。履約價像樓梯一樣一階一階排開 — $100 的股票可能有 90、95、100、105、110。<strong>越接近現價越貴。</strong></p>
+      </div>
+      <div class="card">
+        <h3>到期日（Expiration）</h3>
+        <p>合約失效的日期。距離到期越久，權利金越高 — 因為能發生的事越多。常用「距到期天數」（DTE）表示：45 DTE、21 DTE。到期那一刻，合約結算消失。</p>
+      </div>
+      <div class="card">
+        <h3>權利金（Premium）</h3>
+        <p>選擇權的價格 — 買方付、賣方收，以每股報價（一口 ×100）。權利金本質上是市場對「不確定性」的定價：不確定性越高，權利金越貴。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>價內、價平、價外</h2>
+    <p class="section-sub">描述履約價和現價相對位置的用語，台灣市場稱為「價性」。</p>
+    <table class="data">
+      <thead><tr><th>狀態</th><th>買權例子（股價 $100）</th><th>賣權例子（股價 $100）</th><th>意思</th></tr></thead>
+      <tbody>
+        <tr><td><strong>價內（ITM）</strong></td><td>履約價 $90 的買權</td><td>履約價 $110 的賣權</td><td>現在履約就有賺。有內含價值。</td></tr>
+        <tr><td><strong>價平（ATM）</strong></td><td>履約價 $100 的買權</td><td>履約價 $100 的賣權</td><td>履約價 ≈ 現價。最「爆發」的選擇權 — 見<a href="greeks.html">Gamma</a>。</td></tr>
+        <tr><td><strong>價外（OTM）</strong></td><td>履約價 $110 的買權</td><td>履約價 $90 的賣權</td><td>現在履約會賠錢。純時間價值。賣方的主戰場。</td></tr>
+      </tbody>
+    </table>
+    <p class="section-sub" style="margin-bottom:0;">賣方主要賣<strong>價外</strong>選擇權：對買方便宜、到期歸零機率高 — 而「歸零」正是賣方要的結果。</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>買方 vs 賣方：同一張合約，相反的經濟學</h2>
+    <p class="section-sub">不對稱的損益結構，是本站所有策略存在的根本原因。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>買選擇權</h3>
+        <ul>
+          <li>先<strong>付</strong>權利金；拿到<strong>權利</strong>、沒有義務。</li>
+          <li>最大虧損 = 付的權利金。明確、有上限。</li>
+          <li>獲利空間大（買權理論上無上限）。</li>
+          <li><strong>但：</strong>每天都被時間價值侵蝕，而且多數選擇權到期歸零。方向看對還不夠，時機也要對。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>賣選擇權</h3>
+        <ul>
+          <li>先<strong>收</strong>權利金；扛下<strong>義務</strong>。</li>
+          <li>最大獲利 = 收到的權利金。有上限。</li>
+          <li>時間站在你這邊 — 每過一天，你欠的價值就少一點。</li>
+          <li><strong>但：</strong>虧損可能超過權利金（裸賣風險無限）。賣方贏得多、輸得少 — 少數的大虧損，要靠部位規模控管來存活。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout tip"><strong class="k">賣方的賭注：</strong>「我不需要預測未來，我只需要股價『不要』出現極端走勢。」這種用機率代替預測的思維，就是本站的哲學核心。</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>內含價值 vs 時間價值：你付的錢到底買了什麼</h2>
+    <p class="section-sub">每口選擇權的權利金，都可以拆成兩部分：</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>內含價值（Intrinsic Value）</h3>
+        <p>現在立刻履約能拿到的價值。股價 $100、履約價 $90 的買權，內含價值就是 $10。價外選擇權的內含價值為<strong>零</strong> — 這部分永遠不會被時間侵蝕。</p>
+      </div>
+      <div class="card">
+        <h3>時間價值（Time / Extrinsic Value）</h3>
+        <p>權利金扣掉內含價值剩下的部分 — 市場為「到期前可能更值錢的機會」付的價格。這部分會隨著到期接近<strong>衰減歸零</strong>，而且越接近到期衰減越快。</p>
+      </div>
+    </div>
+    <div class="metric-def">權利金 = 內含價值 + 時間價值</div>
+    <p style="color:var(--muted);margin-top:14px;"><strong style="color:var(--text);">什麼在吃掉時間價值：</strong>（1）<strong>時間流逝</strong> — 最大也最可預測的力量；（2）<strong>隱含波動率下降</strong> — 市場恐慌消退，權利金跟著縮水；（3）股價<strong>遠離</strong>履約價。賣方同時被這三者付錢。</p>
+    <p style="color:var(--muted);">到期那一刻，時間價值恰好歸零 — 選擇權只剩內含價值。這就是賣方希望合約到期時是價外的原因：對買方一文不值，就等於賣方<strong>整筆權利金落袋</strong>。</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>選擇權價格怎麼動</h2>
+    <p class="section-sub">四股力量在推動選擇權價格。搞懂這個，希臘字母那頁讀起來就像複習。</p>
+    <div class="grid grid-2">
+      <div class="card"><h3>📈 股價變動</h3><p>股價漲，買權漲；股價跌，賣權漲。變動的「速度」用 <strong>Delta</strong> 衡量 — 股價每動 $1，選擇權大約動多少。</p></div>
+      <div class="card"><h3>⏳ 時間流逝</h3><p>每一天，時間價值都在流失 — 越接近到期流失越快。這個每日損耗就是 <strong>Theta</strong>：買方的成本，賣方的收入。</p></div>
+      <div class="card"><h3>🌊 波動率變化</h3><p>預期波動（隱含波動率）上升，所有選擇權變貴；下降則變便宜。對它的敏感度叫 <strong>Vega</strong>。</p></div>
+      <div class="card"><h3>🏦 利率</h3><p>利率上升，買權小漲、賣權小跌。影響很小 — 用 <strong>Rho</strong> 衡量。</p></div>
+    </div>
+    <p style="margin-top:20px;"><a href="greeks.html">希臘字母，一個一個講清楚 →</a></p>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>履約與指派</h2>
+    <p class="section-sub">當有人真的動用權利時，會發生什麼事。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>履約（買方的選擇）</h3>
+        <p>買方<strong>自行決定</strong>是否動用合約：買權買方用履約價<strong>買進</strong> 100 股；賣權買方用履約價<strong>賣出</strong> 100 股。實務上買方多半直接把選擇權賣掉 — 提早履約等於把剩餘的時間價值丟掉。</p>
+      </div>
+      <div class="card">
+        <h3>指派（賣方的驚喜）</h3>
+        <p>如果你是賣方、買方選擇履約，你就會被<strong>指派</strong>：賣出買權被指派＝必須用履約價<strong>賣出</strong> 100 股；賣出賣權被指派＝必須用履約價<strong>買進</strong> 100 股。接近到期、價內的賣方部位最容易被指派 — 這也是賣方在 21 DTE 就出場的原因之一。</p>
+      </div>
+    </div>
+    <div class="callout"><strong class="k" style="color:var(--gold);">美式 vs 歐式：</strong>多數個股與 ETF 選擇權是<strong>美式</strong> — 到期前任何一天都可履約。SPX 等指數選擇權是<strong>歐式</strong> — 只能在到期日履約，完全沒有提早被指派的風險。</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>大家為什麼交易選擇權</h2>
+    <p class="section-sub">選擇權有三個正當用途，都比直接買股票更有效率。</p>
+    <div class="grid grid-3">
+      <div class="card"><h3>🚀 槓桿</h3><p>用零頭的錢控制 100 股。$200 的買權，表現可能像持有 $10,000 的股票 — 賺賠都被放大。新手對槓桿務必心存敬畏。</p></div>
+      <div class="card"><h3>💰 收租</h3><p>賣出選擇權收權利金 — 對持股賣備兌買權、對想買的股票賣現金擔保賣權。本站的滾輪策略就是建立在這件事上。</p></div>
+      <div class="card"><h3>🛡️ 避險</h3><p>買賣權替股票部位買保險：大盤下跌時賣權賺錢，緩衝損失。跟所有保險一樣要付保費 — 重點永遠是「這個保護值不值得這個價」。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>新手必知的風險</h2>
+    <p class="section-sub">第一筆交易之前，請讀兩遍。</p>
+    <div class="grid grid-2">
+      <div class="card"><h3>⚠️ 槓桿是雙面刃</h3><p>選擇權放大波動。股票跌 5%，選擇權可能賠掉五成以上。部位要小到「看錯也無感」，而不是「看錯就重傷」。</p></div>
+      <div class="card"><h3>⚠️ 時間價值從不睡覺</h3><p>當選擇權<strong>買方</strong>，你是在租時間 — 而且租金天天到期。很多買進的選擇權，方向看對了還賠錢，只因為走得太慢。</p></div>
+      <div class="card"><h3>⚠️ 賣方虧損可能超過權利金</h3><p>裸賣選擇權風險無限。收 $200 權利金的部位，遇到跳空可能賠 $2,000 以上。沒有規模控管和出場規則，絕對不要裸賣。</p></div>
+      <div class="card"><h3>⚠️ 指派與流動性</h3><p>流動性差的選擇權買賣價差很大 — 那是每筆交易都在繳的隱形稅。而價內的賣方部位接近到期可能被提早指派，尤其在除息前後。只做流動性好的標的，別把賣方部位抱進危險區。</p></div>
+    </div>
+    <div class="callout warn"><strong class="k" style="color:var(--red);">新手鐵律：</strong>只拿賠光也無所謂的錢進場，每筆部位維持小水位（<a href="rules.html">交易規則</a>建議有限風險部位佔帳戶 1–3%），真金白銀下場前先用模擬單熟悉機制。</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>下一步去哪裡</h2>
+    <p class="section-sub">你已經會講這個語言了。建議的學習路徑：</p>
+    <div class="formula" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="step"><div class="num">1</div><div class="val">αβγ</div><div class="lbl"><a href="greeks.html"><strong>希臘字母</strong></a> — 選擇權價格真正的驅動方式，賣方與買方各怎麼用</div></div>
+      <div class="step"><div class="num">2</div><div class="val">♟</div><div class="lbl"><a href="strategies.html"><strong>策略手冊</strong></a> — 九種賣方結構，精確的進場與管理方式</div></div>
+      <div class="step"><div class="num">3</div><div class="val">16</div><div class="lbl"><a href="rules.html"><strong>交易規則</strong></a> — 讓賣方活下去的十六條機械化規則</div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>免責聲明：</strong>OptionsWizard 僅為教育性質的內容，不構成任何投資建議，也不推薦買賣任何證券。選擇權交易涉及重大虧損風險（可能損失超過原始投入金額），並不適合每一位投資人。過去的策略績效不保證未來結果。交易前請諮詢合格的專業人士。</div>
+    <nav class="footer-nav">
+      <a href="index.html">首頁</a><a href="options-basics.html">入門</a><a href="strategies.html">策略</a><a href="greeks.html">希臘字母</a><a href="rules.html">規則</a><a href="metrics.html">指標</a><a href="mistakes.html">誤區</a><a href="../index.html">English</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard。交易機率，不交易觀點。</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

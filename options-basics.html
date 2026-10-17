@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Options Basics — OptionsWizard</title>
+<meta name="description" content="Options from zero: what a contract is, calls vs puts, strike/expiration/premium, ITM/ATM/OTM, buying vs selling, intrinsic vs time value, assignment, and why people trade options.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="options-basics.html" class="active">Basics</a>
+      <a href="strategies.html">Playbook</a>
+      <a href="greeks.html">Greeks</a>
+      <a href="rules.html">Rules</a>
+      <a href="metrics.html">Metrics</a>
+      <a href="mistakes.html">Mistakes</a>
+      <span class="lang-switch"><a href="options-basics.html" class="on">EN</a><a href="tw/options-basics.html">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>Options Basics</h1>
+    <p>New to options? Start here. This page takes you from "what even is an option" to understanding every term used in the Playbook — with simple $100-stock examples and no assumed knowledge.</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>What an Option Contract Is</h2>
+    <p class="section-sub">An option is a contract that gives its <strong>buyer</strong> the <em>right</em> — but not the <em>obligation</em> — to buy or sell a stock at a fixed price, before a fixed date. The buyer pays the <strong>seller</strong> a price for that right. That price is called the <strong>premium</strong>.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>The buyer</h3>
+        <p>Pays the premium. Gets <strong>rights</strong>: the right to buy (call) or sell (put) at the agreed price. Maximum loss is capped at the premium paid — you can never lose more than you put in as a buyer.</p>
+      </div>
+      <div class="card">
+        <h3>The seller</h3>
+        <p>Collects the premium. Takes on <strong>obligations</strong>: if the buyer exercises, the seller must honor the deal. The seller's profit is capped at the premium collected — but the risk can be much larger.</p>
+      </div>
+    </div>
+    <div class="callout tip"><strong class="k">Key detail:</strong> one standard option contract controls <strong>100 shares</strong> of stock. So a $2.50 premium means $2.50 × 100 = <strong>$250</strong> per contract. Always multiply by 100.</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>Calls vs Puts</h2>
+    <p class="section-sub">There are only two kinds of options. Everything else on this site is built from these two.</p>
+    <div class="grid grid-2">
+      <div class="card strategy-card">
+        <h3>Call — the right to <em>buy</em></h3>
+        <p>A call buyer pays for the right to <strong>buy</strong> 100 shares at the strike price before expiration. Calls go up in value when the stock rises.</p>
+        <p><strong>Example:</strong> XYZ trades at $100. You buy a $105 call for $2.00 ($200 total). If XYZ rallies to $115, your right to buy at $105 is worth at least $10 per share — the contract is now worth $1,000+. If XYZ stays under $105, the call expires worthless and you lose the $200.</p>
+      </div>
+      <div class="card strategy-card">
+        <h3>Put — the right to <em>sell</em></h3>
+        <p>A put buyer pays for the right to <strong>sell</strong> 100 shares at the strike price before expiration. Puts go up in value when the stock falls.</p>
+        <p><strong>Example:</strong> XYZ trades at $100. You buy a $95 put for $2.00 ($200 total). If XYZ crashes to $85, your right to sell at $95 is worth at least $10 per share — the contract is now worth $1,000+. If XYZ stays above $95, the put expires worthless and you lose the $200.</p>
+      </div>
+    </div>
+    <div class="callout gold"><strong class="k">Memory aid:</strong> "Call <em>up</em>" — you call the stock up to you. "Put <em>down</em>" — you put the stock down onto someone else. And the <strong>seller</strong> of each takes the opposite side: a call seller is paid to accept the obligation to <em>sell</em> shares; a put seller is paid to accept the obligation to <em>buy</em> shares.</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>The Three Moving Parts</h2>
+    <p class="section-sub">Every option is defined by three numbers. Change any one and the price changes.</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>Strike price</h3>
+        <p>The fixed price at which the buyer may buy (call) or sell (put) the shares. Strikes come in a ladder — for a $100 stock you might see 90, 95, 100, 105, 110. <strong>Closer to the current stock price = more expensive.</strong></p>
+      </div>
+      <div class="card">
+        <h3>Expiration</h3>
+        <p>The date the contract dies. More time until expiration = more premium, because more can happen. Options are quoted in days to expiration (DTE): 45 DTE, 21 DTE, and so on. At expiration, the contract settles and disappears.</p>
+      </div>
+      <div class="card">
+        <h3>Premium</h3>
+        <p>The option's price — what the buyer pays and the seller collects, quoted per share (×100 per contract). Premium is the market's price for <em>uncertainty</em>: more uncertainty, higher premium.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>ITM, ATM, OTM: Moneyness</h2>
+    <p class="section-sub">"Moneyness" just describes where the strike sits relative to the stock price right now.</p>
+    <table class="data">
+      <thead><tr><th>Term</th><th>Call example ($100 stock)</th><th>Put example ($100 stock)</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td><strong>In the money (ITM)</strong></td><td>$90 strike call</td><td>$110 strike put</td><td>Exercising <em>right now</em> would pay off. Has intrinsic value.</td></tr>
+        <tr><td><strong>At the money (ATM)</strong></td><td>$100 strike call</td><td>$100 strike put</td><td>Strike ≈ stock price. The most "explosive" options — see <a href="greeks.html">Gamma</a>.</td></tr>
+        <tr><td><strong>Out of the money (OTM)</strong></td><td>$110 strike call</td><td>$90 strike put</td><td>Exercising now would lose money. Pure time value. This is where premium sellers live.</td></tr>
+      </tbody>
+    </table>
+    <p class="section-sub" style="margin-bottom:0;">Premium sellers mostly sell <strong>OTM</strong> options: cheaper for buyers, high probability of expiring worthless — which is exactly what the seller wants.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Buying vs Selling: The Two Sides of Every Trade</h2>
+    <p class="section-sub">Same contract, opposite economics. This asymmetry is the entire reason the strategies on this site exist.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Buying options</h3>
+        <ul>
+          <li><strong>Pay</strong> premium up front; <strong>rights</strong>, no obligations.</li>
+          <li>Max loss = the premium paid. Defined and capped.</li>
+          <li>Profit potential is large (unlimited on calls).</li>
+          <li><strong>But:</strong> you are fighting time decay every single day, and most options expire worthless. You must be right about direction <em>and</em> timing.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Selling options</h3>
+        <ul>
+          <li><strong>Collect</strong> premium up front; take on <strong>obligations</strong>.</li>
+          <li>Max profit = the premium collected. Capped.</li>
+          <li>Time decay works <em>for</em> you — every passing day erodes what you owe.</li>
+          <li><strong>But:</strong> losses can exceed the premium (undefined on naked calls/puts). Sellers win often and lose rarely — the rare losses are what position sizing exists to survive.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout tip"><strong class="k">The seller's bet:</strong> "I don't need to predict the future. I just need the stock to <em>not</em> do something extreme." That framing — probability instead of prediction — is the philosophical core of this site.</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>Intrinsic vs Time Value: What You're Actually Paying For</h2>
+    <p class="section-sub">Every option's premium splits into two components:</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Intrinsic value</h3>
+        <p>What the option is worth <em>right now</em> if exercised. A $90 call on a $100 stock has $10 of intrinsic value. OTM options have <strong>zero</strong> intrinsic value — it's the part that can never decay.</p>
+      </div>
+      <div class="card">
+        <h3>Time (extrinsic) value</h3>
+        <p>Everything <em>above</em> intrinsic value — the market's price for the chance the option becomes more valuable before expiration. This is what <strong>decays to zero</strong> as expiration approaches, faster and faster near the end.</p>
+      </div>
+    </div>
+    <div class="metric-def">Premium = Intrinsic value + Time value</div>
+    <p style="color:var(--muted);margin-top:14px;"><strong style="color:var(--text);">What eats time value:</strong> (1) <strong>passing time</strong> — the biggest and most predictable force; (2) <strong>falling implied volatility</strong> — when fear drains out of the market, premiums shrink; (3) the stock drifting <strong>away</strong> from the strike. Premium sellers get paid by all three.</p>
+    <p style="color:var(--muted);">At expiration, time value is exactly zero — an option is worth only its intrinsic value. That's why sellers want contracts to expire OTM: worthless for the buyer means <strong>kept premium</strong> for the seller.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>How an Option's Price Moves</h2>
+    <p class="section-sub">Four forces move an option's price. Learn these and the Greeks page will feel like a recap.</p>
+    <div class="grid grid-2">
+      <div class="card"><h3>📈 Stock price moves</h3><p>Calls rise when the stock rises; puts rise when it falls. The <em>rate</em> of that move is measured by <strong>Delta</strong> — roughly, how many dollars the option gains per $1 stock move.</p></div>
+      <div class="card"><h3>⏳ Time passes</h3><p>Every day, time value bleeds out — faster near expiration. This daily bleed is <strong>Theta</strong>: a cost for buyers, income for sellers.</p></div>
+      <div class="card"><h3>🌊 Volatility changes</h3><p>When expected volatility (implied volatility) rises, <em>all</em> options get more expensive; when it falls, they cheapen. Sensitivity to this is <strong>Vega</strong>.</p></div>
+      <div class="card"><h3>🏦 Interest rates</h3><p>Higher rates nudge call prices up and put prices down slightly. The effect is small for most trades — measured by <strong>Rho</strong>.</p></div>
+    </div>
+    <p style="margin-top:20px;"><a href="greeks.html">The Greeks, explained one by one →</a></p>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>Exercise and Assignment</h2>
+    <p class="section-sub">What actually happens when someone uses their rights.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Exercise (the buyer's choice)</h3>
+        <p>The buyer <em>chooses</em> to use the contract: a call buyer <strong>buys</strong> 100 shares at the strike; a put buyer <strong>sells</strong> 100 shares at the strike. Buyers usually just sell the option itself instead — exercising early throws away remaining time value.</p>
+      </div>
+      <div class="card">
+        <h3>Assignment (the seller's surprise)</h3>
+        <p>If you're short an option and the buyer exercises, you get <strong>assigned</strong>: a short call means you must <em>sell</em> 100 shares at the strike; a short put means you must <em>buy</em> 100 shares at the strike. Assignment risk is highest for ITM short options near expiration — one more reason sellers exit at 21 DTE.</p>
+      </div>
+    </div>
+    <div class="callout"><strong class="k" style="color:var(--gold);">American vs European style:</strong> most stock/ETF options are <strong>American-style</strong> — exercisable any day before expiration. Index options like SPX are <strong>European-style</strong> — exercisable only at expiration, which removes early-assignment risk entirely.</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Why People Trade Options</h2>
+    <p class="section-sub">Three legitimate jobs options do better than stock.</p>
+    <div class="grid grid-3">
+      <div class="card"><h3>🚀 Leverage</h3><p>Control 100 shares for a fraction of the cost. A $200 call can behave like owning $10,000 of stock — gains <em>and</em> losses are magnified. Beginners should treat leverage with extreme respect.</p></div>
+      <div class="card"><h3>💰 Income</h3><p>Sell options to collect premium — covered calls on stocks you own, cash-secured puts on stocks you'd buy anyway. The wheel strategy on this site is built on exactly this.</p></div>
+      <div class="card"><h3>🛡️ Protection</h3><p>Buy puts as insurance on a stock position: if the market falls, the puts pay off and cushion the loss. Like all insurance, it costs premium — the question is always whether the protection is worth the price.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>Key Risks for Beginners</h2>
+    <p class="section-sub">Read this twice before your first trade.</p>
+    <div class="grid grid-2">
+      <div class="card"><h3>⚠️ Leverage cuts both ways</h3><p>Options magnify moves. A 5% stock drop can mean a 50%+ loss on the option. Size positions so that being wrong is boring, not catastrophic.</p></div>
+      <div class="card"><h3>⚠️ Time decay never sleeps</h3><p>As an option <em>buyer</em>, you're renting time — and the rent is due daily. Most long options lose money even when the stock moves your way, just too slowly.</p></div>
+      <div class="card"><h3>⚠️ Sellers can lose more than they collect</h3><p>Naked short options have undefined risk. A $200 credit can turn into a $2,000+ loss on a gap move. Never sell naked without a sizing plan and an exit rule.</p></div>
+      <div class="card"><h3>⚠️ Assignment and liquidity</h3><p>Illiquid options have wide bid/ask spreads — a hidden tax on every trade. And ITM short options can be assigned early, especially around dividends. Trade liquid underlyings, and don't hold short premium into the danger zone.</p></div>
+    </div>
+    <div class="callout warn"><strong class="k" style="color:var(--red);">The beginner's rule of thumb:</strong> risk only money you can afford to lose completely, keep every position small (the <a href="rules.html">Rules</a> page suggests 1–3% of account value per defined-risk trade), and paper-trade the mechanics before committing real capital.</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Where to Go Next</h2>
+    <p class="section-sub">You now speak the language. Here's the recommended learning path:</p>
+    <div class="formula" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="step"><div class="num">1</div><div class="val">αβγ</div><div class="lbl"><a href="greeks.html"><strong>The Greeks</strong></a> — how option prices actually move, and how sellers and buyers use each Greek</div></div>
+      <div class="step"><div class="num">2</div><div class="val">♟</div><div class="lbl"><a href="strategies.html"><strong>The Playbook</strong></a> — nine premium-selling structures with exact setups and management</div></div>
+      <div class="step"><div class="num">3</div><div class="val">16</div><div class="lbl"><a href="rules.html"><strong>The Rules</strong></a> — the sixteen mechanical rules that keep sellers alive</div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>Disclaimer:</strong> OptionsWizard is an educational resource only — not financial advice, and not a recommendation to buy or sell any security. Options trading involves substantial risk of loss, including the possible loss of more than your initial investment, and is not suitable for every investor. Past strategy performance does not guarantee future results. Consult a qualified financial professional before trading.</div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a><a href="options-basics.html">Basics</a><a href="strategies.html">Playbook</a><a href="greeks.html">Greeks</a><a href="rules.html">Rules</a><a href="metrics.html">Metrics</a><a href="mistakes.html">Mistakes</a><a href="tw/index.html">中文版</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard. Trade the odds, not the opinion.</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>
