@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OptionsWizard — Mechanical Premium-Selling Options Strategies</title>
+<meta name="description" content="OptionsWizard: a practical guide to mechanical, probability-based premium-selling options strategies — strangles, iron condors, the wheel, and the rules that keep sellers alive.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="strategies.html">Playbook</a>
+      <a href="rules.html">Rules</a>
+      <a href="metrics.html">Metrics</a>
+      <a href="mistakes.html">Mistakes</a>
+      <span class="lang-switch"><a href="index.html" class="on">EN</a><a href="tw/index.html">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Options<span class="accent">Wizard</span></h1>
+    <p class="tagline">Trade the odds, not the opinion.</p>
+    <p class="lead">A practical field guide to mechanical premium-selling: the strategies, the numbers, and the risk rules used by systematic options sellers. No hot takes, no chart astrology — just probability, position sizing, and discipline.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="strategies.html">Open the Playbook</a>
+      <a class="btn btn-ghost" href="rules.html">Read the Rules</a>
+    </div>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>The Core Philosophy</h2>
+    <p class="section-sub">Four ideas do almost all the work. Everything on this site is a consequence of them.</p>
+    <div class="grid grid-4">
+      <div class="card">
+        <h3>1. Sell premium</h3>
+        <p>Options are systematically priced for larger moves than actually happen — implied volatility runs richer than realized volatility over time. A consistent seller of options collects that difference. Volatility isn't the enemy; it's the product.</p>
+      </div>
+      <div class="card">
+        <h3>2. Probability over opinion</h3>
+        <p>Pick trades by their probability of profit, not by a forecast about direction. Buying stock is roughly a coin flip. Selling premium when implied volatility is elevated can start at 60–90% probability of profit — before any view on the market.</p>
+      </div>
+      <div class="card">
+        <h3>3. Trade small, trade often</h3>
+        <p>The edge is small per trade, so occurrences are the engine. A high number of small, consistent trades lets the law of large numbers do the compounding. One hero trade is gambling; a hundred disciplined ones is a business.</p>
+      </div>
+      <div class="card">
+        <h3>4. Manage winners early</h3>
+        <p>Every trade gets its management plan <em>before</em> entry — where you'll take profit, when you'll exit, how you'll defend. No discretion, no hope, no "let me watch it for one more day."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>The Flagship Formula</h2>
+    <p class="section-sub">The standard mechanical setup for short-premium trades. Five numbers, memorized once, applied forever:</p>
+    <div class="formula">
+      <div class="step"><div class="num">1</div><div class="val">16Δ</div><div class="lbl">Sell the 16-delta strikes — about one standard deviation out</div></div>
+      <div class="step"><div class="num">2</div><div class="val">45</div><div class="lbl">Enter with ~45 days to expiration</div></div>
+      <div class="step"><div class="num">3</div><div class="val">50+</div><div class="lbl">Only when IV Rank is above 50</div></div>
+      <div class="step"><div class="num">4</div><div class="val">50%</div><div class="lbl">Take profit at 50% of max profit</div></div>
+      <div class="step"><div class="num">5</div><div class="val">21</div><div class="lbl">Close or roll at 21 days to expiration — always</div></div>
+    </div>
+    <div class="callout tip"><strong class="k">Why it works:</strong> large-sample backtests of 16-delta, 45-DTE short strangles on SPY show that managing winners at 50% of max profit produces roughly a 90% win rate with an average hold around three weeks — while exiting at 21 DTE cuts the largest losses roughly in half versus holding to expiration. The management <em>is</em> the edge.</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>The Playbook at a Glance</h2>
+    <p class="section-sub">Nine structures, one doctrine. Click through for setup, timing, and management on each.</p>
+    <div class="grid grid-3">
+      <div class="card strategy-card flagship">
+        <h3>Short Strangle <span class="tag">Flagship</span></h3>
+        <p>Sell an out-of-the-money call and put at the same expiration. The core neutral premium trade — undefined risk, managed mechanically.</p>
+        <a href="strategies.html#strangle">Full breakdown →</a>
+      </div>
+      <div class="card strategy-card">
+        <h3>Iron Condor</h3>
+        <p>The defined-risk version of the strangle: short call spread plus short put spread. Wings cap the loss; you trade some premium for sleep.</p>
+        <a href="strategies.html#ironcondor">Full breakdown →</a>
+      </div>
+      <div class="card strategy-card">
+        <h3>Cash-Secured Puts &amp; the Wheel</h3>
+        <p>Sell puts on stocks you'd own at the strike; if assigned, sell covered calls against the shares. Premium first, stock second.</p>
+        <a href="strategies.html#wheel">Full breakdown →</a>
+      </div>
+      <div class="card strategy-card">
+        <h3>Jade Lizard</h3>
+        <p>A short put plus a short call spread, sized so the credit exceeds the call-spread width — removing all upside risk. Neutral to slightly bullish.</p>
+        <a href="strategies.html#jadelizard">Full breakdown →</a>
+      </div>
+      <div class="card strategy-card">
+        <h3>Covered Calls</h3>
+        <p>Sell calls against shares you own. Dampens upside in exchange for steady premium and a lower cost basis.</p>
+        <a href="strategies.html#coveredcall">Full breakdown →</a>
+      </div>
+      <div class="card strategy-card">
+        <h3>Vertical Credit Spreads</h3>
+        <p>Defined-risk directional premium trades. Same 50%-profit / 21-DTE management as the big structures, in a smaller package.</p>
+        <a href="strategies.html#creditspread">Full breakdown →</a>
+      </div>
+    </div>
+    <p style="margin-top:20px;"><a href="strategies.html">See all nine strategies, including ratio spreads, broken-wing butterflies, and diagonals →</a></p>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>Start Here</h2>
+    <p class="section-sub">Three pages that turn the philosophy into a tradable routine.</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>📏 The Mechanical Rules</h3>
+        <p>Sixteen numbered rules: when to sell, how big, how much heat to carry, and what to never do. Print-worthy.</p>
+        <a href="rules.html">Read the rules →</a>
+      </div>
+      <div class="card">
+        <h3>📊 The Metrics That Matter</h3>
+        <p>IV Rank, IV percentile, expected move, delta-as-probability, buying power — the dashboard behind every entry decision.</p>
+        <a href="metrics.html">Learn the metrics →</a>
+      </div>
+      <div class="card">
+        <h3>⚠️ Mistakes &amp; Loser Management</h3>
+        <p>Oversizing kills more accounts than strategy choice. How to roll losers, why time exits beat P/L stops, and the classic blow-ups.</p>
+        <a href="mistakes.html">Study the mistakes →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>Disclaimer:</strong> OptionsWizard is an educational resource only — not financial advice, and not a recommendation to buy or sell any security. Options trading involves substantial risk of loss, including the possible loss of more than your initial investment, and is not suitable for every investor. Past strategy performance does not guarantee future results. Consult a qualified financial professional before trading.</div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a><a href="strategies.html">Playbook</a><a href="rules.html">Rules</a><a href="metrics.html">Metrics</a><a href="mistakes.html">Mistakes</a><a href="tw/index.html">中文版</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard. Trade the odds, not the opinion.</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

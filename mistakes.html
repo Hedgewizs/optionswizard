@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mistakes &amp; Loser Management — OptionsWizard</title>
+<meta name="description" content="How premium sellers manage losers: rolling the untested side, why the 21-DTE time exit beats P/L stops, position sizing as survival, and the classic beginner mistakes.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="strategies.html">Playbook</a>
+      <a href="rules.html">Rules</a>
+      <a href="metrics.html">Metrics</a>
+      <a href="mistakes.html" class="active">Mistakes</a>
+      <span class="lang-switch"><a href="mistakes.html" class="on">EN</a><a href="tw/mistakes.html">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>Mistakes &amp; Loser Management</h1>
+    <p>Winning trades take care of themselves. Accounts are lost on the other side — oversized positions, unmanaged losers, and held-to-expiration tails. This page is the defense manual.</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Oversizing Is the #1 Killer</h2>
+    <p class="section-sub">Traders who blow up on undefined-risk options rarely fail because of the strategy. They fail because the position was too big for the tail that arrived. Risk-of-ruin research tells the story plainly: cutting position size can drop the probability of blowing up from roughly <strong>13% to under 1%</strong>. Same strategy, same market — only the size changed.</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>3–7% per trade</h3>
+        <p>Undefined-risk trades get <strong>3–7% of net liquidation value</strong> each. Defined-risk trades get <strong>1–3%</strong>. These are ceilings, not suggestions.</p>
+      </div>
+      <div class="card">
+        <h3>15% per underlying</h3>
+        <p>No single ticker — no matter how "safe" — gets more than <strong>15% of net liq</strong>. Concentration turns a normal loss into a career event.</p>
+      </div>
+      <div class="card">
+        <h3>Stay consistent</h3>
+        <p>A 10% position next to a 1% position breaks the statistical model the whole system rests on. <strong>Uniform small size</strong> is what lets the law of large numbers work.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top:44px;"><span class="dot"></span>Managing Losers: Roll, Don't Hope</h2>
+    <p class="section-sub">For undefined-risk positions, the canonical defense is rolling — not stop-losses.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Roll the untested side</h3>
+        <p>When one side of a strangle is breached, <strong>roll the non-losing side closer</strong> to the stock price. This collects fresh premium and cuts the position's deltas (a common rule of thumb: reduce deltas by 30–50%). If the underlying keeps running, roll the entire position out in time — extend duration rather than accept the loss at the worst moment.</p>
+      </div>
+      <div class="card">
+        <h3>Time exits beat P/L stops</h3>
+        <p>The popular "close when the loss doubles" stop feels disciplined, but research on short-premium portfolios found P/L-based stops <strong>underperform the simple 21-DTE time exit</strong>. Stops tend to lock in losses on positions that would have recovered; the time exit cuts gamma risk while letting mean reversion do its work. For defined-risk trades, don't manage losers at all — the wings cap the damage; just exit at 21 DTE.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top:44px;"><span class="dot"></span>The Classic Beginner Mistakes</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>❌ Trading without a mechanical plan</h3>
+        <p>Entering a trade with no pre-set profit target, exit date, or defense — then improvising under stress. Every entry on this site comes with its management attached. No plan, no trade.</p>
+      </div>
+      <div class="card">
+        <h3>❌ Holding through earnings</h3>
+        <p>Most earnings moves land inside the expected move, which tempts sellers to stay. The tail is brutally asymmetric: one gap wipes out months of collected premium. Stay small or step aside.</p>
+      </div>
+      <div class="card">
+        <h3>❌ Holding short premium to expiration</h3>
+        <p>Gamma risk accelerates in the final weeks. The last few dollars of premium are the most expensive dollars you'll ever try to collect. Manage at 50%, exit at 21 DTE.</p>
+      </div>
+      <div class="card">
+        <h3>❌ Selling when IV is low</h3>
+        <p>Low IV means thin premium for the same risk — and never pay record prices to <em>buy</em> volatility either. When vol is cheap, sell further out, size down, or wait.</p>
+      </div>
+      <div class="card">
+        <h3>❌ Trading illiquid underlyings</h3>
+        <p>Wide bid/ask spreads are a hidden tax on every entry, exit, and roll. If you can't get in and out cheaply, the edge is gone before the trade starts.</p>
+      </div>
+      <div class="card">
+        <h3>❌ Treating premium like free money</h3>
+        <p>Premium selling is not income without risk — it's risk with income. Respect the tail: size for margin expansion and gap risk, because history's worst days (the 2018 vol spike, March 2020, the August 2024 spike) are always one headline away.</p>
+      </div>
+    </div>
+
+    <div class="callout warn"><strong class="k">The bottom line:</strong> undefined risk does not mean unmanaged risk. Small size, the 21-DTE exit, rolling instead of hoping, and staying out of binary events — that's the entire survival kit. Everything else is optimization.</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>Disclaimer:</strong> OptionsWizard is an educational resource only — not financial advice, and not a recommendation to buy or sell any security. Options trading involves substantial risk of loss, including the possible loss of more than your initial investment, and is not suitable for every investor. Past strategy performance does not guarantee future results. Consult a qualified financial professional before trading.</div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a><a href="strategies.html">Playbook</a><a href="rules.html">Rules</a><a href="metrics.html">Metrics</a><a href="mistakes.html">Mistakes</a><a href="tw/mistakes.html">中文版</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard. Trade the odds, not the opinion.</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>策略手冊 — OptionsWizard</title>
+<meta name="description" content="九種機械化選擇權賣方策略：賣出勒式、鐵兀鷹、滾輪策略、備兌買權、Jade Lizard、信用價差、比率價差、斷翼蝴蝶、對角價差。">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="選單">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">首頁</a>
+      <a href="strategies.html" class="active">策略手冊</a>
+      <a href="rules.html">交易規則</a>
+      <a href="metrics.html">關鍵指標</a>
+      <a href="mistakes.html">常見錯誤</a>
+      <span class="lang-switch"><a href="../strategies.html">EN</a><a href="strategies.html" class="on">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>策略手冊</h1>
+    <p>九種結構，同一套心法：隱含波動率高時賣出、小部位、獲利達 50% 了結、到期前 21 天出場。每張卡片給你進場方式、時機與管理計畫。</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2 id="strangle"><span class="dot"></span>1. 賣出勒式 <span style="font-size:0.8rem;color:var(--gold);">— 旗艦策略</span></h2>
+    <p class="section-sub">同時賣出同到期日的價外買權與價外賣權，履約價都在 16 Delta 附近。只要標的維持在兩個履約價之間，就能收下兩邊的權利金。</p>
+    <div class="card strategy-card flagship">
+      <dl>
+        <div class="spec-row"><dt>結構</dt><dd>賣出 16Δ 買權＋賣出 16Δ 賣權，同到期日。履約價大約落在一個標準差的預期波動邊界上。</dd></div>
+        <div class="spec-row"><dt>時機</dt><dd>IV Rank <strong>高於 50</strong>（80 以上是極端值，權利金最肥）。優先選擇 SPY、QQQ 這類流動性高的指數 ETF — 比個股更不容易跳空。</dd></div>
+        <div class="spec-row"><dt>進場天期</dt><dd><strong>約 45 天到期</strong>。時間夠讓 Theta 衰減發揮，又離到期夠遠，避開加速的 Gamma 風險。</dd></div>
+        <div class="spec-row"><dt>Delta 目標</dt><dd>兩邊各 <strong>16 Delta</strong>（單邊到期歸零機率約 84%）。</dd></div>
+        <div class="spec-row"><dt>管理</dt><dd><strong>獲利達已收權利金 50% 就買回了結</strong>。<strong>到期前 21 天無論輸贏一律出場</strong> — 不抱進到期週。</dd></div>
+        <div class="spec-row"><dt>防守</dt><dd>若一邊被突破，把<strong>沒受傷的那一邊轉倉</strong>靠近現價，收取新的權利金並降低 Delta。若行情繼續走，就把整個部位轉倉到更遠的月份。</dd></div>
+        <div class="spec-row"><dt>風險</dt><dd>理論風險無限 — 但<em>無限風險不等於放任風險</em>。部位規模、轉倉防守、21 天出場規則就是管理。</dd></div>
+      </dl>
+    </div>
+    <div class="callout tip"><strong class="k">數據怎麼說：</strong>SPY 的 45 天期、16 Delta 賣出勒式大樣本回測顯示：50% 停利時勝率約九成、平均持有約三週；抱到到期勝率約八成二。到期前 21 天出場，最大虧損比抱到到期少了將近一半，長期平均虧損降低約六成。</div>
+
+    <h2 id="ironcondor" style="margin-top:44px;"><span class="dot"></span>2. 鐵兀鷹</h2>
+    <p class="section-sub">勒式的有限風險版本：賣出買權價差＋賣出賣權價差。用翅膀為虧損設下天花板，代價是少收一點權利金。</p>
+    <div class="card strategy-card">
+      <dl>
+        <div class="spec-row"><dt>結構</dt><dd>賣出價外買權價差＋賣出價外賣權價差，同到期日。賣出端履約價在 <strong>16–20 Delta</strong> 區間。</dd></div>
+        <div class="spec-row"><dt>權利金準則</dt><dd>進場時目標收到約<strong>價差寬度的三分之一</strong> — 這是報酬與機率最平衡的甜蜜點。</dd></div>
+        <div class="spec-row"><dt>時機</dt><dd>高隱含波動率環境，與勒式相同。</dd></div>
+        <div class="spec-row"><dt>進場天期</dt><dd><strong>約 45 天</strong>；<strong>到期前 21 天</strong>無論輸贏出場。</dd></div>
+        <div class="spec-row"><dt>管理</dt><dd><strong>獲利達最大利潤 50% 了結。</strong>虧損端不設停損 — 翅膀本身就是虧損管理。最大虧損＝較寬價差的寬度減去已收權利金。</dd></div>
+      </dl>
+    </div>
+
+    <h2 id="wheel" style="margin-top:44px;"><span class="dot"></span>3. 現金擔保賣權與滾輪策略</h2>
+    <p class="section-sub">為「你真的想擁有的股票」設計的收租策略。賣賣權收權利金，若被指派股票，就對股票賣出備兌買權 — 輪子不停轉。</p>
+    <div class="card strategy-card">
+      <dl>
+        <div class="spec-row"><dt>結構</dt><dd>賣出價外賣權，同時準備足夠現金以履約價承接股票。</dd></div>
+        <div class="spec-row"><dt>時機</dt><dd>高 IV，且<strong>只做你願意用履約價買進的股票</strong>。不想持有，就不要賣它的賣權。</dd></div>
+        <div class="spec-row"><dt>管理</dt><dd><strong>獲利達最大利潤 50% 就了結</strong>，不看剩餘天期 — 長期下來這能最大化勝率。若被指派，仔細追蹤成本（收到的權利金直接降低實際買進成本），然後對股票賣出價外備兌買權，繼續壓低成本。</dd></div>
+        <div class="spec-row"><dt>虧損控制</dt><dd>若虧損擴大到約已收權利金的 2–3 倍，可考慮出場 — 這是防範災難性尾部的安全閥。無限風險的部位規模紀律同樣適用。</dd></div>
+      </dl>
+    </div>
+
+    <h2 id="coveredcall" style="margin-top:44px;"><span class="dot"></span>4. 備兌買權</h2>
+    <p class="section-sub">持有股票，賣掉你用不到的上檔空間。最單純的賣方交易。</p>
+    <div class="card strategy-card">
+      <dl>
+        <div class="spec-row"><dt>結構</dt><dd>每持有 100 股，就賣出一口價外買權。</dd></div>
+        <div class="spec-row"><dt>時機</dt><dd>直接持有的股票，或滾輪策略中被指派的股票。適合盤整到溫和看多的情境。</dd></div>
+        <div class="spec-row"><dt>管理</dt><dd>把買權向上／向遠月轉倉，持續收取權利金；每一筆收到的權利金都在降低你的持有成本。若股價衝破履約價，向上轉倉讓你保持機械化參與。</dd></div>
+      </dl>
+    </div>
+
+    <h2 id="jadelizard" style="margin-top:44px;"><span class="dot"></span>5. Jade Lizard（翡翠蜥蜴）</h2>
+    <p class="section-sub">中性偏多的賣方結構：賣出賣權＋賣出買權價差，結構設計讓淨權利金大於買權價差寬度 — 上檔風險因此完全消除。</p>
+    <div class="card strategy-card">
+      <dl>
+        <div class="spec-row"><dt>結構</dt><dd>賣出賣權＋賣出買權價差（買權價差通常比賣權更接近價平）。<strong>鐵律：淨權利金必須大於買權價差的寬度。</strong></dd></div>
+        <div class="spec-row"><dt>時機</dt><dd>中性到略偏多；股價回檔後 <strong>IV Rank 偏高</strong>的股票或 ETF。它利用賣權偏態（put skew）— 下檔賣權定價比上檔買權貴的現象。</dd></div>
+        <div class="spec-row"><dt>Delta</dt><dd>賣出賣權約 <strong>20–30 Delta</strong> 價外；賣出買權約 <strong>15–20 Delta</strong> 價外；買權價差寬度通常 1–5 美元。</dd></div>
+        <div class="spec-row"><dt>進場天期</dt><dd><strong>約 45 天</strong>，與勒式家族同一套心法。</dd></div>
+        <div class="spec-row"><dt>管理</dt><dd><strong>獲利達原始權利金 50% 了結；到期前 21 天處理。</strong>不設固定停損。用轉倉防守 — 例如股價漲破買權價差，就把賣出賣權向上轉倉再收一筆權利金。</dd></div>
+      </dl>
+    </div>
+
+    <h2 id="creditspread" style="margin-top:44px;"><span class="dot"></span>6. 垂直信用價差</h2>
+    <p class="section-sub">有限風險的方向性賣方交易 — 鐵兀鷹拆成一半的輕量版。</p>
+    <div class="card strategy-card">
+      <dl>
+        <div class="spec-row"><dt>結構</dt><dd>同方向賣出一口價外價差、買入一口更價外的價差（牛市賣權價差或熊市買權價差）。</dd></div>
+        <div class="spec-row"><dt>時機</dt><dd>想帶一點方向、但要鎖住風險時；或保證金吃緊時的小部位做法。</dd></div>
+        <div class="spec-row"><dt>管理</dt><dd><strong>獲利達權利金 50% 或到期前 21 天了結。</strong>虧損端不需管理 — 風險已被價差寬度鎖死。</dd></div>
+      </dl>
+    </div>
+
+    <div class="grid grid-3" style="margin-top:28px;">
+      <div class="card strategy-card" id="ratiospread">
+        <h3>7. 比率價差</h3>
+        <dl>
+          <div class="spec-row"><dt>結構</dt><dd>不同履約價，賣出數量多於買入數量（例如 1×2 賣權比率價差）。</dd></div>
+          <div class="spec-row"><dt>管理</dt><dd><strong>獲利達最大利潤 30% 了結。</strong>若走勢不利，向遠月轉倉。</dd></div>
+        </dl>
+      </div>
+      <div class="card strategy-card" id="brokenwing">
+        <h3>8. 斷翼蝴蝶</h3>
+        <dl>
+          <div class="spec-row"><dt>結構</dt><dd>兩邊翅膀寬度不對稱的蝴蝶式價差，以淨權利金進場。</dd></div>
+          <div class="spec-row"><dt>管理</dt><dd><strong>獲利達最大利潤 25% 了結。</strong>虧損端不需管理 — 風險有限。</dd></div>
+        </dl>
+      </div>
+      <div class="card strategy-card" id="diagonal">
+        <h3>9. 對角價差</h3>
+        <dl>
+          <div class="spec-row"><dt>結構</dt><dd>買賣不同履約價「且」不同到期月份 — 帶方向性的日曆價差。</dd></div>
+          <div class="spec-row"><dt>管理</dt><dd><strong>獲利達最大利潤 25% 了結。</strong>若走勢不利，把<strong>近月份的部位向前轉倉</strong>。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="callout gold"><strong class="k">看出規律了嗎：</strong>這一頁每個策略都由同三個槓桿管理 — 停利目標（通常是最大利潤的 50%）、時間出場（到期前 21 天）、防守（轉倉）。槓桿學一次，結構只是包裝。</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>免責聲明：</strong>OptionsWizard 僅為教育性質的內容，不構成任何投資建議，也不推薦買賣任何證券。選擇權交易涉及重大虧損風險（可能損失超過原始投入金額），並不適合每一位投資人。過去的策略績效不保證未來結果。交易前請諮詢合格的專業人士。</div>
+    <nav class="footer-nav">
+      <a href="index.html">首頁</a><a href="strategies.html">策略手冊</a><a href="rules.html">交易規則</a><a href="metrics.html">關鍵指標</a><a href="mistakes.html">常見錯誤</a><a href="../strategies.html">English</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard。交易機率，不交易觀點。</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

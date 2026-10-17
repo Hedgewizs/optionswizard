@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Playbook — OptionsWizard</title>
+<meta name="description" content="Nine mechanical premium-selling options strategies: short strangle, iron condor, the wheel, covered calls, Jade Lizard, credit spreads, ratio spreads, broken-wing butterflies, diagonals.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="strategies.html" class="active">Playbook</a>
+      <a href="rules.html">Rules</a>
+      <a href="metrics.html">Metrics</a>
+      <a href="mistakes.html">Mistakes</a>
+      <span class="lang-switch"><a href="strategies.html" class="on">EN</a><a href="tw/strategies.html">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>The Playbook</h1>
+    <p>Nine structures, one doctrine: sell when implied volatility is rich, size small, take winners at 50% of max profit, and be gone by 21 days to expiration. Each card gives you the setup, the timing, and the management plan.</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2 id="strangle"><span class="dot"></span>1. Short Strangle <span style="font-size:0.8rem;color:var(--gold);">— the flagship</span></h2>
+    <p class="section-sub">Sell one out-of-the-money call and one out-of-the-money put, same expiration, both around 16 delta. You collect premium from both sides and profit if the underlying stays between the strikes.</p>
+    <div class="card strategy-card flagship">
+      <dl>
+        <div class="spec-row"><dt>Setup</dt><dd>Short 16Δ call + short 16Δ put, same expiry. The strikes sit roughly at the one-standard-deviation expected-move boundary.</dd></div>
+        <div class="spec-row"><dt>When</dt><dd>IV Rank above 50 (80+ is extreme and pays the best). Favor liquid index ETFs like SPY and QQQ — they're less prone to gap moves than single stocks.</dd></div>
+        <div class="spec-row"><dt>Entry DTE</dt><dd><strong>~45 days.</strong> Enough time for theta decay to do the work, far enough from expiration to dodge accelerating gamma risk.</dd></div>
+        <div class="spec-row"><dt>Delta target</dt><dd><strong>~16 on each side</strong> (≈84% chance of expiring out of the money per leg).</dd></div>
+        <div class="spec-row"><dt>Management</dt><dd><strong>Take profit at 50% of the credit received</strong> (buy the strangle back for half what you sold it for). <strong>Close at 21 DTE no matter what</strong> — win, lose, or flat. Never hold into expiration week.</dd></div>
+        <div class="spec-row"><dt>Defense</dt><dd>If one side is tested, <strong>roll the untested side closer</strong> to the stock to collect more premium and cut deltas. If the move keeps going, roll the whole position out in time.</dd></div>
+        <div class="spec-row"><dt>Risk</dt><dd>Undefined — but <em>undefined risk is not unmanaged risk</em>. Sizing, rolling, and the 21-DTE exit are the management.</dd></div>
+      </dl>
+    </div>
+    <div class="callout tip"><strong class="k">What the data says:</strong> large-sample backtests of 45-DTE, 16-delta SPY strangles show ~90% win rates when winners are taken at 50% of max profit (average hold ~3 weeks), versus ~82% when held to expiration. Exiting at 21 DTE cuts the largest losses roughly in half and reduces long-run average losses by about 60%.</div>
+
+    <h2 id="ironcondor" style="margin-top:44px;"><span class="dot"></span>2. Iron Condor</h2>
+    <p class="section-sub">The defined-risk cousin of the strangle: a short call spread stacked on a short put spread. You give up some premium to buy wings that cap your loss.</p>
+    <div class="card strategy-card">
+      <dl>
+        <div class="spec-row"><dt>Setup</dt><dd>Short OTM call spread + short OTM put spread, same expiry. Short legs in the <strong>16–20 delta</strong> range.</dd></div>
+        <div class="spec-row"><dt>Credit rule</dt><dd>Aim to collect about <strong>one-third of the strike width</strong> in premium at entry — that's the sweet spot between payout and probability.</dd></div>
+        <div class="spec-row"><dt>When</dt><dd>High-IV environments, same as the strangle.</dd></div>
+        <div class="spec-row"><dt>Entry DTE</dt><dd><strong>~45 days</strong>; close at <strong>21 DTE</strong> regardless of P/L.</dd></div>
+        <div class="spec-row"><dt>Management</dt><dd><strong>Close at 50% of max profit.</strong> No stop-loss on losers — the wings <em>are</em> the loss management. Max loss is capped at the width of the widest spread minus the credit received.</dd></div>
+      </dl>
+    </div>
+
+    <h2 id="wheel" style="margin-top:44px;"><span class="dot"></span>3. Cash-Secured Puts &amp; the Wheel</h2>
+    <p class="section-sub">The income strategy for stocks you actually want to own. Sell puts, collect premium, and if you're assigned the shares, sell covered calls against them — the "wheel" keeps turning.</p>
+    <div class="card strategy-card">
+      <dl>
+        <div class="spec-row"><dt>Setup</dt><dd>Sell an out-of-the-money put with cash set aside to buy the shares if assigned.</dd></div>
+        <div class="spec-row"><dt>When</dt><dd>High IV, and <strong>only on stocks you'd be happy to own at the strike price</strong>. If you wouldn't own it, don't sell the put.</dd></div>
+        <div class="spec-row"><dt>Management</dt><dd><strong>Close at 50% of max profit</strong> regardless of DTE — this maximizes win rate over time. If assigned, track your cost basis (premium received lowers your effective purchase price), then sell OTM covered calls on the shares to keep reducing basis.</dd></div>
+        <div class="spec-row"><dt>Loss control</dt><dd>Consider closing if the loss reaches roughly 2–3× the premium received — a circuit breaker against the catastrophic tail. Undefined-risk sizing discipline applies.</dd></div>
+      </dl>
+    </div>
+
+    <h2 id="coveredcall" style="margin-top:44px;"><span class="dot"></span>4. Covered Calls</h2>
+    <p class="section-sub">Own the shares, sell the upside you don't need. The simplest premium trade in the book.</p>
+    <div class="card strategy-card">
+      <dl>
+        <div class="spec-row"><dt>Setup</dt><dd>Sell an out-of-the-money call against every 100 shares you own.</dd></div>
+        <div class="spec-row"><dt>When</dt><dd>On stocks you own outright or were assigned via cash-secured puts (the wheel). Best with a flat to mildly bullish outlook.</dd></div>
+        <div class="spec-row"><dt>Management</dt><dd>Roll the call up and/or out to keep collecting premium; every credit received lowers your cost basis. If the stock rips through the strike, rolling up lets you participate while staying mechanical.</dd></div>
+      </dl>
+    </div>
+
+    <h2 id="jadelizard" style="margin-top:44px;"><span class="dot"></span>5. Jade Lizard</h2>
+    <p class="section-sub">A neutral-to-bullish premium structure: a short put plus a short call spread, sized so the net credit exceeds the call-spread width — which removes all upside risk.</p>
+    <div class="card strategy-card">
+      <dl>
+        <div class="spec-row"><dt>Setup</dt><dd>Short put + short call spread (the call spread typically sits closer to at-the-money than the put). <strong>The defining rule: net credit must be greater than the width of the call spread.</strong></dd></div>
+        <div class="spec-row"><dt>When</dt><dd>Neutral to slightly bullish outlook; stocks or ETFs that have sold off with a <strong>high IV Rank</strong>. It exploits put skew — the tendency of downside puts to be priced richer than upside calls.</dd></div>
+        <div class="spec-row"><dt>Deltas</dt><dd>Short put around <strong>20–30 delta</strong> OTM; short call around <strong>15–20 delta</strong> OTM; call-spread width typically $1–$5.</dd></div>
+        <div class="spec-row"><dt>Entry DTE</dt><dd><strong>~45 days</strong>, same doctrine as the strangle family.</dd></div>
+        <div class="spec-row"><dt>Management</dt><dd><strong>Close at 50% of the original credit; manage at 21 DTE.</strong> No fixed stop-loss. Defend by rolling the untested side — e.g., if the stock rallies through the call spread, roll the short put up to collect more premium.</dd></div>
+      </dl>
+    </div>
+
+    <h2 id="creditspread" style="margin-top:44px;"><span class="dot"></span>6. Vertical Credit Spreads</h2>
+    <p class="section-sub">Defined-risk directional premium trades — the compact version of the condor's halves.</p>
+    <div class="card strategy-card">
+      <dl>
+        <div class="spec-row"><dt>Setup</dt><dd>Sell an OTM spread and buy a further-OTM spread on the same side (bull put spread or bear call spread).</dd></div>
+        <div class="spec-row"><dt>When</dt><dd>When you want a directional lean with capped risk, or when buying power is tight.</dd></div>
+        <div class="spec-row"><dt>Management</dt><dd><strong>Close at 50% of credit or at 21 DTE.</strong> No loss management required — risk is defined by the width of the spread.</dd></div>
+      </dl>
+    </div>
+
+    <div class="grid grid-3" style="margin-top:28px;">
+      <div class="card strategy-card" id="ratiospread">
+        <h3>7. Ratio Spreads</h3>
+        <dl>
+          <div class="spec-row"><dt>Setup</dt><dd>Sell more options than you buy at different strikes (e.g., 1×2 put ratio).</dd></div>
+          <div class="spec-row"><dt>Management</dt><dd><strong>Take profit at 30% of max profit.</strong> If the trade moves against you, roll out in time.</dd></div>
+        </dl>
+      </div>
+      <div class="card strategy-card" id="brokenwing">
+        <h3>8. Broken-Wing Butterfly</h3>
+        <dl>
+          <div class="spec-row"><dt>Setup</dt><dd>An asymmetric butterfly with uneven wing widths, entered for a net credit.</dd></div>
+          <div class="spec-row"><dt>Management</dt><dd><strong>Take profit at 25% of max profit.</strong> No loss management required — risk is defined.</dd></div>
+        </dl>
+      </div>
+      <div class="card strategy-card" id="diagonal">
+        <h3>9. Diagonals</h3>
+        <dl>
+          <div class="spec-row"><dt>Setup</dt><dd>Long and short options at different strikes <em>and</em> different expirations — a calendar with a directional tilt.</dd></div>
+          <div class="spec-row"><dt>Management</dt><dd><strong>Take profit at 25% of max profit.</strong> If it moves against you, <strong>roll the near-month option forward</strong>.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="callout gold"><strong class="k">Notice the pattern:</strong> every strategy on this page is managed by the same three levers — a profit target (usually 50% of max), a time exit (21 DTE), and a defense (roll). Learn the levers once; the structures are just packaging.</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>Disclaimer:</strong> OptionsWizard is an educational resource only — not financial advice, and not a recommendation to buy or sell any security. Options trading involves substantial risk of loss, including the possible loss of more than your initial investment, and is not suitable for every investor. Past strategy performance does not guarantee future results. Consult a qualified financial professional before trading.</div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a><a href="strategies.html">Playbook</a><a href="rules.html">Rules</a><a href="metrics.html">Metrics</a><a href="mistakes.html">Mistakes</a><a href="tw/strategies.html">中文版</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard. Trade the odds, not the opinion.</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>機械化交易規則 — OptionsWizard</title>
+<meta name="description" content="選擇權賣方十六條機械化規則：IV Rank 門檻、45 天進場、16 Delta、50% 停利、21 天出場、部位水位上限。">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="選單">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">首頁</a>
+      <a href="strategies.html">策略手冊</a>
+      <a href="rules.html" class="active">交易規則</a>
+      <a href="metrics.html">關鍵指標</a>
+      <a href="mistakes.html">常見錯誤</a>
+      <span class="lang-switch"><a href="../rules.html">EN</a><a href="rules.html" class="on">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>機械化交易規則</h1>
+    <p>十六條規則。遵守它們，策略幾乎不重要；違反它們，再好的策略也救不了你。每一條都是護欄，防的都是同一個敵人：你自己的臨場發揮。</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <ol class="rules">
+      <li>
+        <h3>只在 IV Rank 高時賣出</h3>
+        <p>IV Rank <strong>高於 50</strong> 是賣出權利金的綠燈；<strong>80 以上</strong>是極端值，權利金最肥。IV Rank 低時你賣的是便宜保險 — 縮小部位、賣更遠的月份，或乾脆休息。</p>
+      </li>
+      <li>
+        <h3>賣方進場約 45 天到期</h3>
+        <p><strong>距離到期 45 天</strong>是標準進場天期。進階版：<strong>IV Rank 低於 30 時考慮 60 天</strong>、<strong>高於 30 時用 30 天</strong> — 波動率高時，靠到期近一點也收得到錢。</p>
+      </li>
+      <li>
+        <h3>賣 16 Delta — 一個標準差</h3>
+        <p><strong>16 Delta</strong> 附近的履約價，到期變成價內的機率約 16% — 也就是市場的一個標準差邊界。這是機率與權利金最平衡的位置。</p>
+      </li>
+      <li>
+        <h3>獲利達 50% 就了結</h3>
+        <p>用<strong>當初收到權利金的一半</strong>把部位買回來。例外：比率價差 30%、蝴蝶與對角價差 25%。提早獲了結，是把「不錯的勝率」變成「極好的勝率」的關鍵。</p>
+      </li>
+      <li>
+        <h3>到期前 21 天一律出場</h3>
+        <p><strong>絕不讓賣方部位進入到期前 21 天以內。</strong>到期附近 Gamma 風險加速，最後幾塊錢的權利金不值得拿尾部風險去換。了結或轉倉，二選一。</p>
+      </li>
+      <li>
+        <h3>部位要小</h3>
+        <p>無限風險交易：每筆 <strong>淨清算價值的 3–7%</strong>。有限風險交易：<strong>1–3%</strong>。部位規模是決定能不能活下去的最大因素 — 詳見<a href="mistakes.html">常見錯誤</a>。</p>
+      </li>
+      <li>
+        <h3>單一標的不超過 15%</h3>
+        <p><strong>任何單一標的，合計不超過淨清算價值的 15%。</strong>再「安全」的標的出事，也只能是困擾，不能是事件。</p>
+      </li>
+      <li>
+        <h3>總水位跟著 VIX 調整</h3>
+        <p>保證金使用上限隨恐慌指數提高 — 但這是<strong>天花板，不是目標</strong>：</p>
+        <table class="data">
+          <thead><tr><th>VIX 水位</th><th>保證金使用上限</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">10 – 15</td><td class="mono">25%</td></tr>
+            <tr><td class="mono">15 – 20</td><td class="mono">30%</td></tr>
+            <tr><td class="mono">20 – 30</td><td class="mono">35%</td></tr>
+            <tr><td class="mono">30 – 40</td><td class="mono">40%</td></tr>
+            <tr><td class="mono">40+</td><td class="mono">50%</td></tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <h3>維持 75/25 的配置</h3>
+        <p>選擇權保證金約 <strong>75% 配置在無限風險</strong>策略（勒式、裸賣權）、<strong>25% 在有限風險</strong>策略（鐵兀鷹、價差）。無限風險端賺得多，有限風險端讓整本帳更平衡。</p>
+      </li>
+      <li>
+        <h3>避開財報</h3>
+        <p><strong>不抱賣方部位過財報或其他二元事件。</strong>尾部極度不對稱 — 多數財報波動落在預期區間內，但沒落進去的那次，足以吃掉好幾個月的權利金。</p>
+      </li>
+      <li>
+        <h3>只做流動性好的標的</h3>
+        <p>買賣價差夠窄是硬性條件。寬價差是每次進場、出場、轉倉的隱形稅 — 會默默吃掉整個系統賴以為生的優勢。</p>
+      </li>
+      <li>
+        <h3>有限風險的虧損部位不處理</h3>
+        <p>翅膀就是管理。有限風險的虧損單放到 21 天出場即可。<strong>無限風險</strong>的虧損單才需要轉倉 — 沒受傷的一邊靠近轉倉，或整個部位向遠月轉。用時間出場，不用損益停損。</p>
+      </li>
+      <li>
+        <h3>整體帳戶維持 Delta 中性</h3>
+        <p>用 Beta 加權把整體 Delta 對標 SPY，保持大盤中性。分散產業與到期月份 — 但記住波動爆發時相關性會趨近 1，所以 Gamma 與壓力情境也要一起看。</p>
+      </li>
+      <li>
+        <h3>高頻率交易 — 次數是引擎</h3>
+        <p>有獲利就收，在場內就延長時間。小優勢重複幾百次是生意；小優勢一年做兩次是樂透。</p>
+      </li>
+      <li>
+        <h3>管理數字，不管理故事</h3>
+        <p>用<strong>獲利機率、資金報酬率、成本降低</strong>來評斷交易 — 不是新聞標題、不是你對某家公司的感覺。策略與持有時間，永遠大過方向。</p>
+      </li>
+      <li>
+        <h3>尊重保證金膨脹</h3>
+        <p>裸部位的保證金需求在壓力下可以<strong>膨脹超過兩倍（極端約 3.6 倍）</strong>。要用壓力下的保證金來決定部位大小，而不是用進場當下的數字 — 否則波動一來，你會在最糟的時機被迫縮小。</p>
+      </li>
+    </ol>
+
+    <div class="callout gold"><strong class="k">一句話版本：</strong>IV 肥時在 16 Delta、45 天進場賣出，小部位，賺一半就走，到期前 21 天出場，絕不讓單一部位 — 或單一到期月份 — 重要到能傷害你。</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>免責聲明：</strong>OptionsWizard 僅為教育性質的內容，不構成任何投資建議，也不推薦買賣任何證券。選擇權交易涉及重大虧損風險（可能損失超過原始投入金額），並不適合每一位投資人。過去的策略績效不保證未來結果。交易前請諮詢合格的專業人士。</div>
+    <nav class="footer-nav">
+      <a href="index.html">首頁</a><a href="strategies.html">策略手冊</a><a href="rules.html">交易規則</a><a href="metrics.html">關鍵指標</a><a href="mistakes.html">常見錯誤</a><a href="../rules.html">English</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard。交易機率，不交易觀點。</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

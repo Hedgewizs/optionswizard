@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Key Metrics — OptionsWizard</title>
+<meta name="description" content="The metrics behind mechanical premium selling: IV Rank, IV percentile, expected move, delta as probability, POP, buying power reduction, and beta-weighted delta.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="strategies.html">Playbook</a>
+      <a href="rules.html">Rules</a>
+      <a href="metrics.html" class="active">Metrics</a>
+      <a href="mistakes.html">Mistakes</a>
+      <span class="lang-switch"><a href="metrics.html" class="on">EN</a><a href="tw/metrics.html">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>The Metrics That Matter</h1>
+    <p>Premium sellers don't watch charts — they watch volatility. These eight metrics are the entire dashboard behind every entry, exit, and sizing decision on this site.</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>IV Rank</h3>
+        <p>The single most important number for a premium seller. IV Rank places current implied volatility inside its own 52-week high–low range, on a 0–100 scale.</p>
+        <div class="metric-def">IV Rank = (current IV − 52wk low) ÷ (52wk high − 52wk low) × 100</div>
+        <p><strong>Above 50</strong> = attractive to sell premium. <strong>80+</strong> = extreme — the richest selling opportunities. One flaw: a single volatility spike distorts the range for a full year, which is why you also check IV percentile.</p>
+      </div>
+      <div class="card">
+        <h3>IV Percentile</h3>
+        <p>The percentage of days in the past <strong>252 trading days</strong> that IV was <em>below</em> the current level. It answers "how often is vol actually this high?" — and fixes IV Rank's single-spike distortion, since one crazy day barely moves a 252-day count.</p>
+        <p>Use the two together: IV Rank tells you where vol sits in its range, IV percentile tells you how unusual that reading really is.</p>
+      </div>
+      <div class="card">
+        <h3>Expected Move</h3>
+        <p>The one-standard-deviation (~68%) move the options market is pricing in, derived from straddle pricing. It's the market's own forecast of how far the underlying can travel — and it typically lines up with the <strong>20–25 delta</strong> strikes.</p>
+        <p>Practical use: your short strikes should sit <em>outside</em> the expected move. If you're selling inside it, you're not getting paid for the risk.</p>
+      </div>
+      <div class="card">
+        <h3>Delta as Probability</h3>
+        <p>Delta doubles as a rough probability gauge: <strong>16 delta ≈ 16% chance of finishing in the money</strong>, or about 68% odds of expiring worthless. That's why the flagship setup sells the 16s — it's the market's one-standard-deviation line, and the sweet spot between premium collected and probability kept.</p>
+      </div>
+      <div class="card">
+        <h3>Probability of Profit (POP)</h3>
+        <p>The target metric for every trade. Short premium sold when IV is elevated typically starts at <strong>60–90% probability of profit</strong>, versus roughly 50/50 for owning stock. You choose trades by POP, not by whether you "like" the stock.</p>
+      </div>
+      <div class="card">
+        <h3>Probability of Touch</h3>
+        <p>The chance the underlying <em>touches</em> your short strike at any point before expiration — always higher than the chance of expiring there. This is the number that tests your nerves mid-trade, and it's exactly why the system manages at 50% of max profit and exits at 21 DTE instead of sweating every touch.</p>
+      </div>
+      <div class="card">
+        <h3>Buying Power Reduction (BPR)</h3>
+        <p>The capital your broker requires to hold the position. Critical nuance: <strong>BPR is not your max loss</strong> — it's a constraint that moves. Naked positions' BPR can expand <strong>more than 2× under stress (worst case ~3.6×)</strong>, so size for the stressed requirement, not the entry number.</p>
+      </div>
+      <div class="card">
+        <h3>Beta-Weighted Delta</h3>
+        <p>Your portfolio's total directional exposure, standardized to SPY. It keeps the book roughly delta-neutral. One caution: in volatility events, correlations spike toward 1.0, so beta-weighted delta <em>understates</em> risk right when it matters most — monitor gamma and stress scenarios alongside it.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top:44px;"><span class="dot"></span>Concentration: Ticker Count Isn't Diversification</h2>
+    <p class="section-sub">SPY, QQQ, and IWM are not three diversifiers — they're three flavors of the same equity beta. Real diversification means watching sector exposure, underlying correlation, and total notional size, not just how many tickers are in the book.</p>
+
+    <div class="callout tip"><strong class="k">The seller's daily checklist:</strong> IV Rank above 50? Strikes at 16 delta outside the expected move? Position under 7% of net liq? Total buying power within the VIX-scaled ceiling? Nothing held through earnings? If yes across the board — place the trade and let the mechanics work.</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>Disclaimer:</strong> OptionsWizard is an educational resource only — not financial advice, and not a recommendation to buy or sell any security. Options trading involves substantial risk of loss, including the possible loss of more than your initial investment, and is not suitable for every investor. Past strategy performance does not guarantee future results. Consult a qualified financial professional before trading.</div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a><a href="strategies.html">Playbook</a><a href="rules.html">Rules</a><a href="metrics.html">Metrics</a><a href="mistakes.html">Mistakes</a><a href="tw/metrics.html">中文版</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard. Trade the odds, not the opinion.</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

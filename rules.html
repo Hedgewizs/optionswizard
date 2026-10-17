@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Mechanical Rules — OptionsWizard</title>
+<meta name="description" content="Sixteen mechanical rules for premium-selling options traders: IV Rank gates, 45-DTE entries, 16 delta, 50% profit management, 21-DTE exits, and portfolio heat limits.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="strategies.html">Playbook</a>
+      <a href="rules.html" class="active">Rules</a>
+      <a href="metrics.html">Metrics</a>
+      <a href="mistakes.html">Mistakes</a>
+      <span class="lang-switch"><a href="rules.html" class="on">EN</a><a href="tw/rules.html">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>The Mechanical Rules</h1>
+    <p>Sixteen rules. Follow them and the strategy almost doesn't matter; break them and the strategy can't save you. Every rule below is a guardrail against the same enemy: your own discretion.</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <ol class="rules">
+      <li>
+        <h3>Sell only when IV Rank is high</h3>
+        <p>IV Rank <strong>above 50</strong> is the green light for selling premium; <strong>80+</strong> is extreme and pays the richest. When IV Rank is low, you're selling cheap insurance — reduce size, sell further out in time, or step aside.</p>
+      </li>
+      <li>
+        <h3>Enter short premium at ~45 DTE</h3>
+        <p><strong>45 days to expiration</strong> is the standard entry. Nuance for precision: consider <strong>60 DTE when IV Rank is below 30</strong> and <strong>30 DTE when IV Rank is above 30</strong> — higher IV lets you enter closer and still get paid.</p>
+      </li>
+      <li>
+        <h3>Sell the 16 delta — one standard deviation</h3>
+        <p>Strikes around <strong>16 delta</strong> carry roughly a 16% chance of finishing in the money — the market's one-standard-deviation boundary. This is where probability and premium balance best for systematic sellers.</p>
+      </li>
+      <li>
+        <h3>Manage winners at 50% of max profit</h3>
+        <p>Buy the position back for <strong>half the credit you received</strong>. Exceptions: ratio spreads at 30%, butterflies and diagonals at 25%. Taking profit early is what converts a good win rate into a great one.</p>
+      </li>
+      <li>
+        <h3>Close at 21 DTE — win, lose, or flat</h3>
+        <p><strong>Never hold short premium inside 21 days to expiration.</strong> Gamma risk accelerates near expiry; the last few dollars of premium aren't worth the tail risk. Close it or roll it out.</p>
+      </li>
+      <li>
+        <h3>Trade small</h3>
+        <p>Undefined-risk trades: <strong>3–7% of net liquidation value</strong> each. Defined-risk trades: <strong>1–3%</strong> each. Position sizing is the single biggest determinant of survival — more on that in <a href="mistakes.html">Mistakes</a>.</p>
+      </li>
+      <li>
+        <h3>Cap concentration at 15%</h3>
+        <p><strong>No more than 15% of net liq in any single underlying.</strong> One ticker going wrong should be an annoyance, never an event.</p>
+      </li>
+      <li>
+        <h3>Scale total heat with the VIX</h3>
+        <p>Maximum buying-power allocation rises with fear — but it's a <strong>ceiling, not a target</strong>:</p>
+        <table class="data">
+          <thead><tr><th>VIX level</th><th>Max buying-power used</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">10 – 15</td><td class="mono">25%</td></tr>
+            <tr><td class="mono">15 – 20</td><td class="mono">30%</td></tr>
+            <tr><td class="mono">20 – 30</td><td class="mono">35%</td></tr>
+            <tr><td class="mono">30 – 40</td><td class="mono">40%</td></tr>
+            <tr><td class="mono">40+</td><td class="mono">50%</td></tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <h3>Keep the 75/25 mix</h3>
+        <p>Allocate roughly <strong>75% of options buying power to undefined-risk</strong> strategies (strangles, naked puts) and <strong>25% to defined-risk</strong> (condors, spreads). The undefined side earns more; the defined side keeps the book balanced.</p>
+      </li>
+      <li>
+        <h3>Stay out of earnings</h3>
+        <p><strong>Do not hold short premium through earnings or other binary events.</strong> The tail is asymmetric — most earnings moves land inside the expected move, but the ones that don't can erase months of premium.</p>
+      </li>
+      <li>
+        <h3>Trade only liquid underlyings</h3>
+        <p>Tight bid/ask spreads are non-negotiable. Wide spreads are a hidden tax on every entry, exit, and roll — they quietly destroy the edge that the whole system is built on.</p>
+      </li>
+      <li>
+        <h3>Don't manage defined-risk losers</h3>
+        <p>The wings are the management. Let defined-risk losers ride to the 21-DTE exit. For <strong>undefined-risk</strong> losers, roll — the untested side closer, or the whole position out in time. Use time-based exits, not P/L stops.</p>
+      </li>
+      <li>
+        <h3>Stay delta-neutral at the portfolio level</h3>
+        <p>Beta-weight your deltas to SPY and keep the book roughly neutral. Diversify across sectors and expiration cycles — but remember that in volatility spikes, correlations run toward 1.0, so watch gamma and stress scenarios too.</p>
+      </li>
+      <li>
+        <h3>Trade often — occurrences are the engine</h3>
+        <p>Take profits when they're offered and extend duration when you're in the trade. A small edge repeated hundreds of times is a business; a small edge traded twice a year is a lottery ticket.</p>
+      </li>
+      <li>
+        <h3>Manage the metric, not the story</h3>
+        <p>Judge trades by <strong>probability of profit, return on capital, and cost-basis reduction</strong> — not by headlines, narratives, or how you feel about a company. Strategy and duration beat direction.</p>
+      </li>
+      <li>
+        <h3>Respect buying-power expansion</h3>
+        <p>Naked positions' margin requirements can <strong>more than double under stress (worst case ~3.6×)</strong>. Size for the stressed margin, not the entry margin — or a volatility spike will size you out at the worst moment.</p>
+      </li>
+    </ol>
+
+    <div class="callout gold"><strong class="k">The one-sentence version:</strong> sell rich IV at 16 delta and 45 DTE, in small size, take half the profit, leave at 21 DTE, and never let one position — or one expiration — matter too much.</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>Disclaimer:</strong> OptionsWizard is an educational resource only — not financial advice, and not a recommendation to buy or sell any security. Options trading involves substantial risk of loss, including the possible loss of more than your initial investment, and is not suitable for every investor. Past strategy performance does not guarantee future results. Consult a qualified financial professional before trading.</div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a><a href="strategies.html">Playbook</a><a href="rules.html">Rules</a><a href="metrics.html">Metrics</a><a href="mistakes.html">Mistakes</a><a href="tw/rules.html">中文版</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard. Trade the odds, not the opinion.</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

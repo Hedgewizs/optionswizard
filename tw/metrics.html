@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>關鍵指標 — OptionsWizard</title>
+<meta name="description" content="機械化賣方背後的指標：IV Rank、IV 百分位、預期波動區間、Delta 機率、獲利機率、保證金佔用、Beta 加權 Delta。">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="選單">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">首頁</a>
+      <a href="strategies.html">策略手冊</a>
+      <a href="rules.html">交易規則</a>
+      <a href="metrics.html" class="active">關鍵指標</a>
+      <a href="mistakes.html">常見錯誤</a>
+      <span class="lang-switch"><a href="../metrics.html">EN</a><a href="metrics.html" class="on">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>關鍵指標</h1>
+    <p>賣方不看線圖，看波動。這八個指標，就是本站每個進場、出場、部位決策背後的全部儀表板。</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>IV Rank（隱含波動率排名）</h3>
+        <p>賣方最重要的數字。把當前的隱含波動率，放進它自己過去 52 週的高低區間裡打分數，0–100 分。</p>
+        <div class="metric-def">IV Rank = (目前 IV − 52 週最低) ÷ (52 週最高 − 52 週最低) × 100</div>
+        <p><strong>高於 50</strong>＝適合賣出權利金；<strong>80 以上</strong>＝極端值，賣方機會最肥。一個缺點：單一次波動爆發會扭曲整整一年的區間，所以要搭配 IV 百分位一起看。</p>
+      </div>
+      <div class="card">
+        <h3>IV 百分位</h3>
+        <p>過去 <strong>252 個交易日</strong>中，IV 低於目前水準的天數占比。它回答「波動真的這麼高的日子有多常見？」— 單一瘋狂交易日幾乎撼動不了 252 天的統計，正好修正 IV Rank 的盲點。</p>
+        <p>兩個一起用：IV Rank 告訴你波動在區間的哪個位置，IV 百分位告訴你這個讀數到底有多罕見。</p>
+      </div>
+      <div class="card">
+        <h3>預期波動區間（Expected Move）</h3>
+        <p>選擇權市場定價出來的一個標準差（約 68%）波動區間，由跨式組合的價格推導。這是市場自己對「標的能走多遠」的預測 — 通常對應 <strong>20–25 Delta</strong> 的履約價附近。</p>
+        <p>實戰用法：你的賣出履約價要放在預期波動區間「之外」。如果賣在區間裡面，等於沒收到足夠的風險貼水。</p>
+      </div>
+      <div class="card">
+        <h3>Delta 即機率</h3>
+        <p>Delta 可以直接當機率用：<strong>16 Delta ≈ 到期變成價內的機率約 16%</strong>，也就是約 68% 的機率到期歸零。這就是旗艦設定賣 16 Delta 的原因 — 它是市場的一個標準差線，也是權利金與機率最平衡的位置。</p>
+      </div>
+      <div class="card">
+        <h3>獲利機率（POP）</h3>
+        <p>每筆交易的目標指標。隱含波動率高時賣出的權利金，起手<strong>獲利機率通常六到九成</strong>，而買股票大約只有五成。你挑交易看的是 POP，不是你「喜不喜歡」這家公司。</p>
+      </div>
+      <div class="card">
+        <h3>觸及機率（Probability of Touch）</h3>
+        <p>到期「前」標的曾經碰到你賣出履約價的機率 — 永遠高於到期時落在那裡的機率。這個數字專門考驗交易中的神經，這也是為什麼系統選擇 50% 停利、21 天出場，而不是跟每一次觸及糾纏。</p>
+      </div>
+      <div class="card">
+        <h3>保證金佔用（BPR）</h3>
+        <p>券商要求你為這個部位準備的資金。關鍵觀念：<strong>BPR 不是你的最大虧損</strong> — 它是一個會動的限制。裸部位的保證金在壓力下可以膨脹<strong>超過兩倍（極端約 3.6 倍）</strong>，所以部位大小要用壓力下的數字來算，不是用進場當下的數字。</p>
+      </div>
+      <div class="card">
+        <h3>Beta 加權 Delta</h3>
+        <p>整個投資組合的方向性曝險，統一換算成 SPY 的 Delta。它讓整本帳維持大盤中性。但要注意：波動事件中相關性會飆向 1，Beta 加權 Delta 會在<em>最關鍵的時刻低估風險</em> — 一定要搭配 Gamma 與壓力情境一起監控。</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top:44px;"><span class="dot"></span>分散：標的數量多 ≠ 真的分散</h2>
+    <p class="section-sub">SPY、QQQ、IWM 不是三種分散工具 — 是同一個股市 Beta 的三種口味。真正的分散要看產業曝險、標的間相關性、總名目金額，而不是帳上掛了幾個代號。</p>
+
+    <div class="callout tip"><strong class="k">賣方的每日檢查清單：</strong>IV Rank 高於 50？履約價在 16 Delta、落在預期波動區間外？單一部位低於淨清算價值 7%？整體保證金在 VIX 對應上限內？沒有抱部位過財報？全部打勾 — 下單，讓機械化去工作。</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>免責聲明：</strong>OptionsWizard 僅為教育性質的內容，不構成任何投資建議，也不推薦買賣任何證券。選擇權交易涉及重大虧損風險（可能損失超過原始投入金額），並不適合每一位投資人。過去的策略績效不保證未來結果。交易前請諮詢合格的專業人士。</div>
+    <nav class="footer-nav">
+      <a href="index.html">首頁</a><a href="strategies.html">策略手冊</a><a href="rules.html">交易規則</a><a href="metrics.html">關鍵指標</a><a href="mistakes.html">常見錯誤</a><a href="../metrics.html">English</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard。交易機率，不交易觀點。</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

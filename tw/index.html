@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OptionsWizard — 機械化賣方選擇權策略</title>
+<meta name="description" content="OptionsWizard：機械化、以機率為基礎的選擇權賣方策略實戰指南 — 勒式、鐵兀鷹、滾輪策略，以及讓賣方活下去的風控規則。">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="選單">☰</button>
+    <nav class="main-nav">
+      <a href="index.html" class="active">首頁</a>
+      <a href="strategies.html">策略手冊</a>
+      <a href="rules.html">交易規則</a>
+      <a href="metrics.html">關鍵指標</a>
+      <a href="mistakes.html">常見錯誤</a>
+      <span class="lang-switch"><a href="../index.html">EN</a><a href="index.html" class="on">中文</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Options<span class="accent">Wizard</span></h1>
+    <p class="tagline">交易機率，不交易觀點。</p>
+    <p class="lead">一套機械化選擇權賣方策略的實戰手冊：策略、數字、風控規則。不談盤感、不畫線 — 只有機率、部位規模和紀律。</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="strategies.html">開啟策略手冊</a>
+      <a class="btn btn-ghost" href="rules.html">閱讀交易規則</a>
+    </div>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>核心理念</h2>
+    <p class="section-sub">四個觀念撐起整個系統，本站所有內容都是它們的延伸。</p>
+    <div class="grid grid-4">
+      <div class="card">
+        <h3>1. 賣出權利金</h3>
+        <p>選擇權的定價長期高估實際波動 — 隱含波動率系統性地高於已實現波動率。持續站在賣方，就是在收割這段差價。波動不是敵人，是商品。</p>
+      </div>
+      <div class="card">
+        <h3>2. 機率高於觀點</h3>
+        <p>用「獲利機率」挑交易，而不是用對方向的預測。買股票大約是丟銅板；隱含波動率高時賣出權利金，起手就有六到九成的獲利機率 — 還不需要對行情有任何看法。</p>
+      </div>
+      <div class="card">
+        <h3>3. 小部位、高頻率</h3>
+        <p>單筆交易的優勢很小，所以「次數」才是引擎。大量小而一致的交易，讓大數法則替你複利。一筆重注是賭博，一百筆紀律交易才是生意。</p>
+      </div>
+      <div class="card">
+        <h3>4. 獲利提早了結</h3>
+        <p>每一筆交易在進場「之前」就寫好劇本：哪裡停利、何時出場、怎麼防守。沒有臨場發揮，沒有「再看一天看看」。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>旗艦公式</h2>
+    <p class="section-sub">機械化賣方交易的標準起手式。五個數字，背一次，用一輩子：</p>
+    <div class="formula">
+      <div class="step"><div class="num">1</div><div class="val">16Δ</div><div class="lbl">賣出 16 Delta 的履約價 — 約一個標準差的位置</div></div>
+      <div class="step"><div class="num">2</div><div class="val">45</div><div class="lbl">進場時距離到期約 45 天</div></div>
+      <div class="step"><div class="num">3</div><div class="val">50+</div><div class="lbl">只在 IV Rank 高於 50 時進場</div></div>
+      <div class="step"><div class="num">4</div><div class="val">50%</div><div class="lbl">獲利達最大利潤 50% 就了結</div></div>
+      <div class="step"><div class="num">5</div><div class="val">21</div><div class="lbl">到期前 21 天一律出場或轉倉</div></div>
+    </div>
+    <div class="callout tip"><strong class="k">為什麼有效：</strong>針對 SPY 的 16 Delta、45 天期賣出勒式，大樣本回測顯示：獲利達 50% 就了結，勝率約九成、平均持有約三週；抱到到期勝率約八成二。而在到期前 21 天出場，能把最大虧損砍掉將近一半。管理方式本身就是優勢所在。</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>策略總覽</h2>
+    <p class="section-sub">九種結構，同一套心法。點進去看每種策略的進場、時機與管理。</p>
+    <div class="grid grid-3">
+      <div class="card strategy-card flagship">
+        <h3>賣出勒式 <span class="tag">旗艦策略</span></h3>
+        <p>同時賣出同到期日的價外買權與價外賣權。核心的中性賣方交易 — 風險無限，但用機械化管理馴服它。</p>
+        <a href="strategies.html#strangle">完整解析 →</a>
+      </div>
+      <div class="card strategy-card">
+        <h3>鐵兀鷹</h3>
+        <p>勒式的有限風險版：賣出買權價差＋賣出賣權價差。用翅膀為虧損設上限，犧牲部分權利金換取安心。</p>
+        <a href="strategies.html#ironcondor">完整解析 →</a>
+      </div>
+      <div class="card strategy-card">
+        <h3>現金擔保賣權與滾輪策略</h3>
+        <p>只賣你願意用履約價買進的股票的賣權；若被指派，就對股票賣出備兌買權。先收權利金，股票其次。</p>
+        <a href="strategies.html#wheel">完整解析 →</a>
+      </div>
+      <div class="card strategy-card">
+        <h3>Jade Lizard（翡翠蜥蜴）</h3>
+        <p>賣出賣權＋賣出買權價差，結構設計讓淨權利金大於買權價差寬度 — 徹底消除上檔風險。中性偏多。</p>
+        <a href="strategies.html#jadelizard">完整解析 →</a>
+      </div>
+      <div class="card strategy-card">
+        <h3>備兌買權</h3>
+        <p>對持有的股票賣出買權。用上檔空間換穩定的權利金收入，持續壓低持有成本。</p>
+        <a href="strategies.html#coveredcall">完整解析 →</a>
+      </div>
+      <div class="card strategy-card">
+        <h3>垂直信用價差</h3>
+        <p>有限風險的方向性賣方交易。鐵兀鷹的一半，管理方式相同：50% 停利、21 天出場。</p>
+        <a href="strategies.html#creditspread">完整解析 →</a>
+      </div>
+    </div>
+    <p style="margin-top:20px;"><a href="strategies.html">查看全部九種策略，含比率價差、斷翼蝴蝶與對角價差 →</a></p>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>從這裡開始</h2>
+    <p class="section-sub">三個頁面，把理念變成可以執行的日常流程。</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>📏 機械化交易規則</h3>
+        <p>十六條編號規則：何時賣、做多大、整體水位上限，以及絕對不能做的事。值得列印貼在螢幕旁。</p>
+        <a href="rules.html">閱讀規則 →</a>
+      </div>
+      <div class="card">
+        <h3>📊 關鍵指標</h3>
+        <p>IV Rank、IV 百分位、預期波動區間、Delta 機率、保證金佔用 — 每個進場決策背後的儀表板。</p>
+        <a href="metrics.html">學習指標 →</a>
+      </div>
+      <div class="card">
+        <h3>⚠️ 常見錯誤與虧損管理</h3>
+        <p>爆倉多半死於部位過大，而非選錯策略。如何轉倉防守、為何時間出場勝過損益停損、經典翻車案例。</p>
+        <a href="mistakes.html">研究錯誤 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>免責聲明：</strong>OptionsWizard 僅為教育性質的內容，不構成任何投資建議，也不推薦買賣任何證券。選擇權交易涉及重大虧損風險（可能損失超過原始投入金額），並不適合每一位投資人。過去的策略績效不保證未來結果。交易前請諮詢合格的專業人士。</div>
+    <nav class="footer-nav">
+      <a href="index.html">首頁</a><a href="strategies.html">策略手冊</a><a href="rules.html">交易規則</a><a href="metrics.html">關鍵指標</a><a href="mistakes.html">常見錯誤</a><a href="../index.html">English</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard。交易機率，不交易觀點。</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>
