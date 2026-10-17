@@ -21,10 +21,77 @@
       <a href="rules.html">Rules</a>
       <a href="metrics.html">Metrics</a>
       <a href="mistakes.html">Mistakes</a>
+      <a href="futures.html">Futures</a>
       <span class="lang-switch"><a href="index.html" class="on">EN</a><a href="tw/index.html">中文</a></span>
     </nav>
   </div>
 </header>
+<!-- Live market strip: client-side fetch from Yahoo Finance public chart API (CORS-open).
+     No API key needed. NOTE: this uses Yahoo's public endpoints for the website;
+     Tim's private market monitoring uses Schwab (OAuth can't run client-side on a static site). -->
+<div class="ticker-strip" id="tickerStrip" aria-label="Live market prices">
+  <div class="ticker-inner" id="tickerInner"></div>
+  <div class="ticker-note" id="tickerNote"><span class="live-dot"></span><span id="tickerNoteText">Loading live prices&hellip;</span></div>
+</div>
+<script>
+(function(){
+  var SYMS = [
+    {s:'ES=F', label:'ES', name:'S&P 500', dec:2},
+    {s:'NQ=F', label:'NQ', name:'Nasdaq 100', dec:2},
+    {s:'YM=F', label:'YM', name:'Dow', dec:0},
+    {s:'CL=F', label:'CL', name:'WTI Crude', dec:2},
+    {s:'GC=F', label:'GC', name:'Gold', dec:1},
+    {s:'SI=F', label:'SI', name:'Silver', dec:3},
+    {s:'HG=F', label:'HG', name:'Copper', dec:4},
+    {s:'BTC-USD', label:'BTC', name:'Bitcoin', dec:0},
+    {s:'ETH-USD', label:'ETH', name:'Ethereum', dec:2}
+  ];
+  var inner = document.getElementById('tickerInner');
+  var noteText = document.getElementById('tickerNoteText');
+  function fmt(n, dec){
+    return n.toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+  }
+  function chip(cfg, price, chg, pct){
+    var cls = chg > 0 ? 'up' : (chg < 0 ? 'down' : 'flat');
+    var sign = chg > 0 ? '+' : '';
+    return '<div class="tick"><div class="t-sym">'+cfg.label+'</div>'+
+      '<div class="t-name">'+cfg.name+'</div>'+
+      '<div class="t-price">'+fmt(price, cfg.dec)+'</div>'+
+      '<div class="t-chg '+cls+'">'+sign+fmt(chg, cfg.dec)+' ('+sign+pct.toFixed(2)+'%)</div></div>';
+  }
+  function load(){
+    var done = 0, ok = 0, latest = 0, html = [];
+    SYMS.forEach(function(cfg){
+      fetch('https://query1.finance.yahoo.com/v8/finance/chart/'+encodeURIComponent(cfg.s)+'?interval=1d&range=2d')
+        .then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.json(); })
+        .then(function(j){
+          var m = j && j.chart && j.chart.result && j.chart.result[0] && j.chart.result[0].meta;
+          // Only render on a genuinely fresh quote: never show stale numbers as live.
+          if(!m || typeof m.regularMarketPrice !== 'number' || typeof m.chartPreviousClose !== 'number') throw new Error('bad payload');
+          var chg = m.regularMarketPrice - m.chartPreviousClose;
+          html.push(chip(cfg, m.regularMarketPrice, chg, chg / m.chartPreviousClose * 100));
+          ok++;
+          if(m.regularMarketTime && m.regularMarketTime > latest) latest = m.regularMarketTime;
+        })
+        .catch(function(){ /* per-symbol failure: chip stays out, no stale data shown */ })
+        .finally(function(){
+          done++;
+          if(done === SYMS.length){
+            if(ok > 0){
+              inner.innerHTML = html.join('');
+              var t = latest ? new Date(latest*1000).toLocaleString([], {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'}) : '';
+              noteText.textContent = 'Live futures & crypto' + (t ? ' \u00b7 as of ' + t : '');
+            } else {
+              noteText.textContent = 'Live data unavailable \u2014 refresh to retry';
+            }
+          }
+        });
+    });
+  }
+  load();
+})();
+</script>
+
 <!-- Leaderboard ad slot (below nav) -->
 <div class="wrap">
   <div class="ad-slot ad-leaderboard">
@@ -221,7 +288,8 @@
   <div class="wrap">
     <div class="disclaimer"><strong>Disclaimer:</strong> OptionsWizard is an educational resource only — not financial advice, and not a recommendation to buy or sell any security. Options trading involves substantial risk of loss, including the possible loss of more than your initial investment, and is not suitable for every investor. Past strategy performance does not guarantee future results. Consult a qualified financial professional before trading.</div>
     <nav class="footer-nav">
-      <a href="index.html">Home</a><a href="options-basics.html">Basics</a><a href="strategies.html">Playbook</a><a href="greeks.html">Greeks</a><a href="rules.html">Rules</a><a href="metrics.html">Metrics</a><a href="mistakes.html">Mistakes</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="tw/index.html">中文版</a>
+      <a href="index.html">Home</a><a href="options-basics.html">Basics</a><a href="strategies.html">Playbook</a><a href="greeks.html">Greeks</a><a href="rules.html">Rules</a><a href="metrics.html">Metrics</a><a href="mistakes.html">Mistakes</a>
+      <a href="futures.html">Futures</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="tw/index.html">中文版</a>
     </nav>
     <div class="copy">© 2026 OptionsWizard. Trade the odds, not the opinion.</div>
   </div>

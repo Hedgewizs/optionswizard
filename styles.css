@@ -288,3 +288,47 @@ footer.site-footer {
 .ad-leaderboard { min-height: 110px; max-width: 970px; }
 .ad-inarticle { min-height: 280px; max-width: 728px; }
 .ad-slot.hidden { display: none; }
+
+/* ---- Live market ticker strip ---- */
+.ticker-strip {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.ticker-inner {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  min-width: max-content;
+  align-items: stretch;
+}
+.tick {
+  flex: 0 0 auto;
+  min-width: 118px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  font-family: var(--mono);
+}
+.tick .t-sym { font-size: 0.72rem; font-weight: 700; color: var(--gold); letter-spacing: 0.06em; }
+.tick .t-name { font-size: 0.68rem; color: var(--muted); font-family: var(--sans); white-space: nowrap; }
+.tick .t-price { font-size: 1.02rem; font-weight: 800; margin-top: 2px; }
+.tick .t-chg { font-size: 0.74rem; font-weight: 700; }
+.tick .up { color: var(--green); }
+.tick .down { color: var(--red); }
+.tick .flat { color: var(--muted); }
+.ticker-note {
+  font-size: 0.7rem;
+  color: var(--muted);
+  padding: 0 16px 8px;
+  font-family: var(--sans);
+}
+.ticker-note .live-dot {
+  display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); margin-right: 6px;
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }

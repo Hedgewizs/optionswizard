@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>期貨入門 — OptionsWizard</title>
+<meta name="description" content="期貨從零開始：什麼是期貨合約、保證金與槓桿、到期與轉倉、最小跳動點、逆價差與正價差，以及 ES、NQ、CL、GC、SI 等合約規格。">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">首頁</a>
+      <a href="options-basics.html">入門</a>
+      <a href="strategies.html">策略</a>
+      <a href="greeks.html">希臘字母</a>
+      <a href="rules.html">規則</a>
+      <a href="metrics.html">指標</a>
+      <a href="mistakes.html">誤區</a>
+      <a href="futures.html" class="active">期貨</a>
+      <span class="lang-switch"><a href="../futures.html">EN</a><a href="futures.html" class="on">中文</a></span>
+    </nav>
+  </div>
+</header>
+<!-- Leaderboard ad slot (below nav) -->
+<div class="wrap">
+  <div class="ad-slot ad-leaderboard">
+    <span class="ad-label">Advertisement</span>
+    <!-- Google AdSense: paste your ad unit code below this line -->
+    <div class="ad-unit" data-ad-slot="leaderboard-top"></div>
+  </div>
+</div>
+
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>期貨入門</h1>
+    <p>選擇權交易者的隔壁就是期貨：同樣的標的，更大的槓桿，沒有權利金可收——只有純粹的方向性曝險和每日現金結算。本頁帶你從「期貨合約到底是什麼」到像老手一樣看懂規格表，全程誠實數學。</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>什麼是期貨合約</h2>
+    <p class="section-sub">期貨合約是一份<strong>標準化</strong>的協議：在未來的固定日期，以固定價格買賣特定數量的某樣東西——指數、原油、黃金。和選擇權不同，這裡沒有「有權利、沒義務」：<strong>雙方都有義務</strong>，而且損益<strong>每天</strong>現金結算。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>做多（買進期貨）</h3>
+        <p>你同意以合約價格<strong>買進</strong>。漲就賺、跌就賠，一點不差。S&amp;P 500 在 6,000 點時，一口 ES 合約掌控 $300,000 的指數——每動 1 點就是帳戶裡 $50 的進出。</p>
+      </div>
+      <div class="card">
+        <h3>做空（賣出期貨）</h3>
+        <p>你同意以合約價格<strong>賣出</strong>。跌就賺、漲就賠。不用借券、不用找券源、沒有「難借」名單——放空期貨跟賣出一口一樣簡單。</p>
+      </div>
+    </div>
+    <div class="callout tip"><strong class="k">關鍵細節：</strong>幾乎沒人真的交割。到期前交易者會<strong>平倉了結</strong>——買的賣掉、賣的買回——部位就消失了，只留下現金損益。期貨是<em>交易</em>工具，不是購物清單。</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>保證金與槓桿：雙面刃</h2>
+    <p class="section-sub">期貨保證金是<strong>履約保證</strong>，不是頭期款。你只押合約價值的一小部分當擔保品，卻掌控全部的名目金額。槓桿——和危險——都從這裡來。</p>
+    <div class="card">
+      <h3>槓桿數學，誠實版</h3>
+      <p>以 S&amp;P 500 在 6,000 點的一口 E-mini（ES）為例：</p>
+      <p class="formula"><span class="val">$50 × 6,000 = $300,000</span> 名目曝險</p>
+      <p>原始保證金約 <strong>$13,000</strong>。用 $13,000 掌控 $300,000——約 <strong>23 倍槓桿</strong>。</p>
+      <p>指數動 1%——稀鬆平常的一天——就是 $3,000，約佔保證金的 <strong>23%</strong>，不論方向。一年總有幾次 4–5% 的下跌週，那會把整筆保證金吃光還有剩。這不是期貨的缺陷；這<em>就是</em>期貨。部位大小請相應調整。</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>原始保證金</h3>
+        <p><strong>開倉</strong>時要繳的錢。由交易所訂定，波動變大時會調高。可以想成上桌的籌碼。</p>
+      </div>
+      <div class="card">
+        <h3>維持保證金</h3>
+        <p>較低的那條線——通常是原始保證金的約九成。每日結算把權益壓到這條線以下，就會收到 <strong>追繳通知</strong>：立刻補錢，否則券商幫你砍倉。沒有「等等看會不會回來」這個選項。</p>
+      </div>
+    </div>
+    <div class="callout warn"><strong class="k" style="color:var(--red);">誠實警告：</strong>槓桿是對稱的——放大獲利<em>也</em>等倍放大虧損。新手請從<strong>微型合約</strong>開始（MES、MNQ：ES/NQ 的十分之一大小）或先模擬交易。一口足額 NQ 每點跳 $20；那斯達克一個正常早盤動 200 點就是 $4,000。</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>到期、第一通知日與轉倉</h2>
+    <p class="section-sub">期貨不會永遠存在。每個合約都有到期月份，想繼續留倉的交易者必須<strong>轉倉</strong>——平掉快到期的合約，再開下一個月的。</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>季月循環</h3>
+        <p>股指期貨按<strong>季</strong>到期：3 月（H）、6 月（M）、9 月（U）、12 月（Z）。能源和金屬是<strong>月</strong>到期。最近的到期月叫<strong>近月</strong>——幾乎所有成交量都在這裡。</p>
+      </div>
+      <div class="card">
+        <h3>第一通知日</h3>
+        <p>實物商品從這天起可能被指定交割。遠在這之前，流動性就已經搬到下一個合約。實務原則：<strong>到期前一兩週就轉倉</strong>，除非你家開煉油廠，否則不要抱到交割。</p>
+      </div>
+      <div class="card">
+        <h3>轉倉的成本</h3>
+        <p>轉倉不是免費的：買賣價差要付<strong>兩次</strong>（一次平倉、一次開倉），而且如果曲線處於<strong>正價差</strong>，下個月合約比你離開的那個貴——每次一點點的損耗。見下文。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>最小跳動點與合約規格</h2>
+    <p class="section-sub">每個合約都定義了<strong>最小跳動點（tick）</strong>——允許的最小價格變動——和<strong>每點價值</strong>：一點值多少錢。兩者相乘，你就知道每次跳動值多少。</p>
+    <div class="card">
+      <h3>怎麼看規格表</h3>
+      <p><strong>範例——原油（CL）：</strong>合約大小 1,000 桶，最小跳動點 $0.01，每跳價值 $10。CL 從 $99.04 漲到 $99.05，就是一跳＝<strong>每口 $10</strong>。漲 $1.00＝100 跳＝<strong>$1,000</strong>。公式永遠是：<em>跳數 × 每跳價值 ＝ 損益</em>。</p>
+    </div>
+    <table class="data">
+      <tr><th>合約</th><th>標的</th><th>交易所</th><th>合約大小</th><th>最小跳動點</th><th>每跳價值</th><th>保證金約*</th></tr>
+      <tr><td><strong>ES</strong></td><td>S&amp;P 500</td><td>CME</td><td>$50 × 指數</td><td>0.25</td><td>$12.50</td><td>~$13,000</td></tr>
+      <tr><td><strong>NQ</strong></td><td>那斯達克 100</td><td>CME</td><td>$20 × 指數</td><td>0.25</td><td>$5.00</td><td>~$18,000</td></tr>
+      <tr><td><strong>YM</strong></td><td>道瓊</td><td>CBOT</td><td>$5 × 指數</td><td>1.00</td><td>$5.00</td><td>~$9,000</td></tr>
+      <tr><td><strong>CL</strong></td><td>WTI 原油</td><td>NYMEX</td><td>1,000 桶</td><td>$0.01</td><td>$10.00</td><td>~$7,000</td></tr>
+      <tr><td><strong>Brent</strong></td><td>布蘭特原油</td><td>ICE</td><td>1,000 桶</td><td>$0.01</td><td>$10.00</td><td>~$6,500</td></tr>
+      <tr><td><strong>GC</strong></td><td>黃金</td><td>COMEX</td><td>100 金衡盎司</td><td>$0.10</td><td>$10.00</td><td>~$11,500</td></tr>
+      <tr><td><strong>SI</strong></td><td>白銀</td><td>COMEX</td><td>5,000 金衡盎司</td><td>$0.005</td><td>$25.00</td><td>~$12,500</td></tr>
+      <tr><td><strong>HG</strong></td><td>銅</td><td>COMEX</td><td>25,000 磅</td><td>$0.0005</td><td>$12.50</td><td>~$7,000</td></tr>
+    </table>
+    <div class="callout"><strong class="k" style="color:var(--gold);">*請與你的券商確認——規格會變。</strong>保證金隨波動調整（市況緊張時交易所會調高），跳動價值固定但合約乘數偶爾會改，而且你的券商要求的可能<em>高於</em>交易所最低標準。第一次交易某合約前，務必看最新的規格表。</div>
+    <div class="callout tip"><strong class="k">新手入口：</strong><strong>微型</strong>合約——MES（微型 S&amp;P）、MNQ（微型那斯達克）——正好是 ES/NQ 的<strong>十分之一</strong>大小。同樣的跳動、同樣的走法，每跳損益十分之一。先在這裡練熟機制，再碰足額合約。</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>正價差與逆價差</h2>
+    <p class="section-sub">把同一合約的不同到期月按日期排開，就是<strong>期貨曲線</strong>。它的形狀告訴你市場的預期——而且它會默默地對每次轉倉的人收稅。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>正價差（Contango）——向上傾斜</h3>
+        <p>遠月合約比近月<strong>貴</strong>。對有倉儲成本的商品（原油、天然氣）是常態：市場跟你收持有成本。在正價差中轉倉做多，等於每次<strong>賣低買高</strong>——穩定的失血。2020 年原油曲線陡到近月一度出現<em>負油價</em>。</p>
+      </div>
+      <div class="card">
+        <h3>逆價差（Backwardation）——向下傾斜</h3>
+        <p>遠月合約比近月<strong>便宜</strong>。代表<em>現在</em>供給緊——買家願意為今天的桶油付高價。在逆價差中轉倉做多，是賣高買低：曲線<strong>付你錢</strong>讓你持有。股指期貨多數時間處於輕微正價差（持有部位的資金成本）。</p>
+      </div>
+    </div>
+    <div class="callout gold"><strong class="k">選擇權交易者為什麼要在意：</strong>期貨曲線是市場對持有成本的投票，不是對方向的預測——但它決定了選擇權價格裡內建的資金假設。而且如果你曾用期貨對沖選擇權部位，在陡峭正價差中不斷轉倉那個對沖，是真實且持續的成本。</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>本站關注的合約</h2>
+    <p class="section-sub">這些是本站市場評論背後的期貨——首頁即時報價列上的同一批。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>ES — E-mini S&amp;P 500</h3>
+        <p>全球成交量最大的股指期貨。「大盤」的代名詞。幾乎 24 小時交易、流動性極深、買賣價差極窄。只做一種期貨的話，就是它。</p>
+      </div>
+      <div class="card">
+        <h3>NQ — E-mini 那斯達克 100</h3>
+        <p>科技股集中、神經質：以每口合約的金額波動來看，約是 ES 的 3–4 倍。更大的波動、更高的保證金、更大的犯錯空間。</p>
+      </div>
+      <div class="card">
+        <h3>YM — E-mini 道瓊</h3>
+        <p>道瓊期貨。名目金額比 ES 小，每點 $5 的數學很直觀。比 NQ 更溫和的股指期貨入口。</p>
+      </div>
+      <div class="card">
+        <h3>CL — WTI 原油</h3>
+        <p>每口 1,000 桶西德州原油。地緣政治的代碼化：週三庫存報告、OPEC 頭條隨時來。動 $1＝$1,000。</p>
+      </div>
+      <div class="card">
+        <h3>GC / SI — 黃金與白銀</h3>
+        <p>經典的恐懼指標。黃金（每口 100 盎司）走趨勢；白銀（每口 5,000 盎司）是<em>暴衝型</em>——白銀的百分比波動經常是黃金的兩倍。白銀部位要比規格表暗示的再縮小一點。</p>
+      </div>
+      <div class="card">
+        <h3>HG — 銅</h3>
+        <p>「銅博士」——擁有經濟學博士學位的金屬。與成長預期和電氣化需求緊密連動；每口 25,000 磅。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>新手必讀風險</h2>
+    <p class="section-sub">第一筆交易前，請讀兩遍。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>槓桿雙面刃</h3>
+        <p>23 倍槓桿意味著 4–5% 的反向波動——一年總有幾次——就能吃掉整筆保證金。期貨沒有「權利金就是最大虧損」的安全欄。做空的理論最大虧損是<em>無上限</em>。</p>
+      </div>
+      <div class="card">
+        <h3>隔夜跳空</h3>
+        <p>期貨幾乎 24 小時交易，但<em>你</em>要睡覺。週末消息、亞洲盤衝擊、庫存報告都可能讓價格跳空遠離你的停損。跳空時停損變成市價單——成交價就是市場重開的地方。</p>
+      </div>
+      <div class="card">
+        <h3>每日結算是真金白銀</h3>
+        <p>虧損是<strong>每天</strong>扣款，不是一次到期結。一個「放著會回來」的部位，每天晚上照樣失血，還可能在回檔中途就觸發追繳。</p>
+      </div>
+      <div class="card">
+        <h3>合約搞混</h3>
+        <p>下到錯的到期月、錯的大小（足額 vs 微型）、或抱到第一通知日，都是新手經典錯誤。每張委託單都要確認<strong>代碼、月份、口數</strong>。</p>
+      </div>
+    </div>
+    <div class="callout warn"><strong class="k" style="color:var(--red);">新手經驗法則：</strong>只拿輸得起的錢，從微型開始，單一部位小到「漲跌停的一天」也不會終結你的帳戶，先模擬交易練熟機制——尤其是轉倉——再投入真金白銀。</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>下一步</h2>
+    <p class="section-sub">你已經會說期貨的語言了。建議的學習路徑：</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>1. 看即時報價</h3>
+        <p>首頁報價列有 ES、NQ、原油、黃金、白銀、銅的即時價格。開始把價格跳動和上面的跳動數學連起來。</p>
+      </div>
+      <div class="card">
+        <h3>2. 學選擇權那一側</h3>
+        <p>期貨選擇權（ES、CL、GC 的選擇權）結合了兩個世界。<a href="options-basics.html">入門</a>講機制，<a href="strategies.html">策略</a>講賣方。</p>
+      </div>
+      <div class="card">
+        <h3>3. 尊重槓桿</h3>
+        <p>讀<a href="rules.html">規則</a>——部位大小是槓桿交易者活下去的關鍵。那些規則是為選擇權寫的；用在期貨上，重要性加倍。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>免責聲明：</strong>OptionsWizard 僅為教育資源——不是財務建議，也不構成買賣任何證券的推薦。期貨交易涉及重大虧損風險，包括可能損失超過原始投資的金額，並不適合所有投資人。合約規格與保證金要求會隨時間變動——請與你的券商確認最新規格。過去績效不保證未來結果。交易前請諮詢合格的財務專業人士。</div>
+    <nav class="footer-nav">
+      <a href="index.html">首頁</a><a href="options-basics.html">入門</a><a href="strategies.html">策略</a><a href="greeks.html">希臘字母</a><a href="rules.html">規則</a><a href="metrics.html">指標</a><a href="mistakes.html">誤區</a><a href="futures.html">期貨</a><a href="about.html">關於</a><a href="privacy.html">隱私權</a><a href="../futures.html">English</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard. Trade the odds, not the opinion.</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function() {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

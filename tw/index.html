@@ -21,10 +21,77 @@
       <a href="rules.html">規則</a>
       <a href="metrics.html">指標</a>
       <a href="mistakes.html">誤區</a>
+      <a href="futures.html">期貨</a>
       <span class="lang-switch"><a href="../index.html">EN</a><a href="index.html" class="on">中文</a></span>
     </nav>
   </div>
 </header>
+<!-- Live market strip: client-side fetch from Yahoo Finance public chart API (CORS-open).
+     No API key needed. NOTE: this uses Yahoo's public endpoints for the website;
+     Tim's private market monitoring uses Schwab (OAuth can't run client-side on a static site). -->
+<div class="ticker-strip" id="tickerStrip" aria-label="Live market prices">
+  <div class="ticker-inner" id="tickerInner"></div>
+  <div class="ticker-note" id="tickerNote"><span class="live-dot"></span><span id="tickerNoteText">即時報價載入中&hellip;</span></div>
+</div>
+<script>
+(function(){
+  var SYMS = [
+    {s:'ES=F', label:'ES', name:'S&P 500', dec:2},
+    {s:'NQ=F', label:'NQ', name:'Nasdaq 100', dec:2},
+    {s:'YM=F', label:'YM', name:'Dow', dec:0},
+    {s:'CL=F', label:'CL', name:'WTI Crude', dec:2},
+    {s:'GC=F', label:'GC', name:'Gold', dec:1},
+    {s:'SI=F', label:'SI', name:'Silver', dec:3},
+    {s:'HG=F', label:'HG', name:'Copper', dec:4},
+    {s:'BTC-USD', label:'BTC', name:'Bitcoin', dec:0},
+    {s:'ETH-USD', label:'ETH', name:'Ethereum', dec:2}
+  ];
+  var inner = document.getElementById('tickerInner');
+  var noteText = document.getElementById('tickerNoteText');
+  function fmt(n, dec){
+    return n.toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+  }
+  function chip(cfg, price, chg, pct){
+    var cls = chg > 0 ? 'up' : (chg < 0 ? 'down' : 'flat');
+    var sign = chg > 0 ? '+' : '';
+    return '<div class="tick"><div class="t-sym">'+cfg.label+'</div>'+
+      '<div class="t-name">'+cfg.name+'</div>'+
+      '<div class="t-price">'+fmt(price, cfg.dec)+'</div>'+
+      '<div class="t-chg '+cls+'">'+sign+fmt(chg, cfg.dec)+' ('+sign+pct.toFixed(2)+'%)</div></div>';
+  }
+  function load(){
+    var done = 0, ok = 0, latest = 0, html = [];
+    SYMS.forEach(function(cfg){
+      fetch('https://query1.finance.yahoo.com/v8/finance/chart/'+encodeURIComponent(cfg.s)+'?interval=1d&range=2d')
+        .then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.json(); })
+        .then(function(j){
+          var m = j && j.chart && j.chart.result && j.chart.result[0] && j.chart.result[0].meta;
+          // Only render on a genuinely fresh quote: never show stale numbers as live.
+          if(!m || typeof m.regularMarketPrice !== 'number' || typeof m.chartPreviousClose !== 'number') throw new Error('bad payload');
+          var chg = m.regularMarketPrice - m.chartPreviousClose;
+          html.push(chip(cfg, m.regularMarketPrice, chg, chg / m.chartPreviousClose * 100));
+          ok++;
+          if(m.regularMarketTime && m.regularMarketTime > latest) latest = m.regularMarketTime;
+        })
+        .catch(function(){ /* per-symbol failure: chip stays out, no stale data shown */ })
+        .finally(function(){
+          done++;
+          if(done === SYMS.length){
+            if(ok > 0){
+              inner.innerHTML = html.join('');
+              var t = latest ? new Date(latest*1000).toLocaleString([], {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'}) : '';
+              noteText.textContent = '期貨與加密貨幣即時報價' + (t ? ' \u00b7 更新於 ' + t : '');
+            } else {
+              noteText.textContent = '即時報價暫時無法取得\u2014\u2014請重新整理重試';
+            }
+          }
+        });
+    });
+  }
+  load();
+})();
+</script>
+
 <!-- Leaderboard ad slot (below nav) -->
 <div class="wrap">
   <div class="ad-slot ad-leaderboard">
@@ -221,7 +288,8 @@
   <div class="wrap">
     <div class="disclaimer"><strong>免責聲明：</strong>OptionsWizard 僅為教育性質的內容，不構成任何投資建議，也不推薦買賣任何證券。選擇權交易涉及重大虧損風險（可能損失超過原始投入金額），並不適合每一位投資人。過去的策略績效不保證未來結果。交易前請諮詢合格的專業人士。</div>
     <nav class="footer-nav">
-      <a href="index.html">首頁</a><a href="options-basics.html">入門</a><a href="strategies.html">策略</a><a href="greeks.html">希臘字母</a><a href="rules.html">規則</a><a href="metrics.html">指標</a><a href="mistakes.html">誤區</a><a href="about.html">關於</a><a href="privacy.html">隱私權</a><a href="../index.html">English</a>
+      <a href="index.html">首頁</a><a href="options-basics.html">入門</a><a href="strategies.html">策略</a><a href="greeks.html">希臘字母</a><a href="rules.html">規則</a><a href="metrics.html">指標</a><a href="mistakes.html">誤區</a>
+      <a href="futures.html">期貨</a><a href="about.html">關於</a><a href="privacy.html">隱私權</a><a href="../index.html">English</a>
     </nav>
     <div class="copy">© 2026 OptionsWizard。交易機率，不交易觀點。</div>
   </div>

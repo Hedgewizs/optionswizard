@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Futures Basics — OptionsWizard</title>
+<meta name="description" content="Futures from zero: what a futures contract is, margin and leverage, expiration and rolling, tick sizes, contango vs backwardation, and the specs for ES, NQ, CL, GC, SI and more.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">Ω</span>Options<em>Wizard</em></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="options-basics.html">Basics</a>
+      <a href="strategies.html">Playbook</a>
+      <a href="greeks.html">Greeks</a>
+      <a href="rules.html">Rules</a>
+      <a href="metrics.html">Metrics</a>
+      <a href="mistakes.html">Mistakes</a>
+      <a href="futures.html" class="active">Futures</a>
+      <span class="lang-switch"><a href="futures.html" class="on">EN</a><a href="tw/futures.html">中文</a></span>
+    </nav>
+  </div>
+</header>
+<!-- Leaderboard ad slot (below nav) -->
+<div class="wrap">
+  <div class="ad-slot ad-leaderboard">
+    <span class="ad-label">Advertisement</span>
+    <!-- Google AdSense: paste your ad unit code below this line -->
+    <div class="ad-unit" data-ad-slot="leaderboard-top"></div>
+  </div>
+</div>
+
+
+<div class="page-hero">
+  <div class="wrap">
+    <h1>Futures Basics</h1>
+    <p>Options traders live next door to futures: the same underlyings, far more leverage, and no premium to collect — just pure directional exposure with daily cash settlement. This page takes you from "what even is a futures contract" to reading a specs table like a local, with honest math throughout.</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>What a Futures Contract Is</h2>
+    <p class="section-sub">A futures contract is a standardized agreement to buy or sell a specific quantity of something — an index, crude oil, gold — at a fixed price, on a fixed future date. Unlike an option, there is no <em>right without obligation</em>: both sides are <strong>obligated</strong>, and gains and losses settle in cash <strong>every single day</strong>.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Long (buy the future)</h3>
+        <p>You agree to <strong>buy</strong> at the contract price. You profit if the price rises, lose dollar-for-dollar if it falls. One ES contract at 6,000 controls $300,000 of S&amp;P 500 — every 1-point move is $50 in or out of your account.</p>
+      </div>
+      <div class="card">
+        <h3>Short (sell the future)</h3>
+        <p>You agree to <strong>sell</strong> at the contract price. You profit if the price falls, lose dollar-for-dollar if it rises. No borrow, no locate, no "hard to borrow" list — shorting a future is as easy as selling one.</p>
+      </div>
+    </div>
+    <div class="callout tip"><strong class="k">Key detail:</strong> almost nobody takes delivery. Before expiration, traders <strong>offset</strong> — sell what they bought, buy back what they sold — and the position simply disappears, leaving only the cash P&amp;L. Futures are a <em>trading</em> vehicle, not a shopping list.</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>Margin &amp; Leverage: The Double-Edged Part</h2>
+    <p class="section-sub">Futures margin is a <strong>performance bond</strong>, not a down payment. You post a fraction of the contract's value as collateral, and you control the entire notional amount. That is where the leverage — and the danger — comes from.</p>
+    <div class="card">
+      <h3>The leverage math, honestly</h3>
+      <p>Take one E-mini S&amp;P (ES) contract with the index at 6,000:</p>
+      <p class="formula"><span class="val">$50 × 6,000 = $300,000</span> of notional exposure</p>
+      <p>Typical initial margin: roughly <strong>$13,000</strong>. So you control $300,000 with $13,000 — about <strong>23-to-1 leverage</strong>.</p>
+      <p>A 1% move in the S&amp;P — an ordinary day — is $3,000. That's <strong>~23% of your margin</strong>, up or down. A 4–5% down week, the kind that happens a few times a year, wipes out the entire margin deposit and then some. This is not a flaw in futures; it <em>is</em> futures. Size accordingly.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Initial margin</h3>
+        <p>What you post to <strong>open</strong> the position. Set by the exchange, raised when volatility rises. Think of it as the table stakes.</p>
+      </div>
+      <div class="card">
+        <h3>Maintenance margin</h3>
+        <p>The lower line — usually ~90% of initial. If daily settlement pushes your equity below it, you get a <strong>margin call</strong>: deposit funds immediately or the broker liquidates you. There is no "wait and hope" setting.</p>
+      </div>
+    </div>
+    <div class="callout warn"><strong class="k" style="color:var(--red);">The honest warning:</strong> leverage is symmetric — it multiplies gains <em>and</em> losses identically. Beginners should start with <strong>micro contracts</strong> (MES, MNQ: one-tenth the size of ES/NQ) or paper trade. A full-size NQ contract moves $20 per point; a 200-point Nasdaq swing — a normal morning — is $4,000.</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Expiration, First Notice &amp; the Roll</h2>
+    <p class="section-sub">Futures don't last forever. Each contract has an expiration month, and traders who want to stay positioned must <strong>roll</strong> — close the expiring contract and open the next one.</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>Quarterly cycle</h3>
+        <p>Equity index futures expire <strong>quarterly</strong>: March (H), June (M), September (U), December (Z). Energy and metals have <strong>monthly</strong> expirations. The nearest expiration is the <strong>front month</strong> — where almost all the volume lives.</p>
+      </div>
+      <div class="card">
+        <h3>First notice day</h3>
+        <p>For physical commodities, this is the first day you could be assigned delivery. Long before that, liquidity migrates to the next contract. Practical rule: <strong>roll a week or two before expiration</strong>, never hold into delivery unless you own a refinery.</p>
+      </div>
+      <div class="card">
+        <h3>The cost of rolling</h3>
+        <p>Rolling isn't free: you pay the spread <strong>twice</strong> (once to close, once to open), and if the curve is in <strong>contango</strong>, the next contract costs more than the one you're leaving — a small, repeated drag. See below.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>Ticks &amp; Contract Specs</h2>
+    <p class="section-sub">Every contract defines a <strong>tick</strong> — the smallest allowed price move — and a <strong>point value</strong>: what one full point of movement is worth. Multiply them and you know exactly what each wiggle costs you.</p>
+    <div class="card">
+      <h3>Reading a specs table</h3>
+      <p><strong>Example — crude oil (CL):</strong> contract size 1,000 barrels, tick $0.01, tick value $10. If CL moves from $99.04 to $99.05, that's one tick = <strong>$10 per contract</strong>. A $1.00 move = 100 ticks = <strong>$1,000</strong>. The math is always: <em>ticks × tick value = P&amp;L</em>.</p>
+    </div>
+    <table class="data">
+      <tr><th>Contract</th><th>Underlying</th><th>Exchange</th><th>Size</th><th>Tick</th><th>Tick value</th><th>Approx. margin*</th></tr>
+      <tr><td><strong>ES</strong></td><td>S&amp;P 500</td><td>CME</td><td>$50 × index</td><td>0.25</td><td>$12.50</td><td>~$13,000</td></tr>
+      <tr><td><strong>NQ</strong></td><td>Nasdaq-100</td><td>CME</td><td>$20 × index</td><td>0.25</td><td>$5.00</td><td>~$18,000</td></tr>
+      <tr><td><strong>YM</strong></td><td>Dow Jones</td><td>CBOT</td><td>$5 × index</td><td>1.00</td><td>$5.00</td><td>~$9,000</td></tr>
+      <tr><td><strong>CL</strong></td><td>WTI crude</td><td>NYMEX</td><td>1,000 barrels</td><td>$0.01</td><td>$10.00</td><td>~$7,000</td></tr>
+      <tr><td><strong>Brent</strong></td><td>Brent crude</td><td>ICE</td><td>1,000 barrels</td><td>$0.01</td><td>$10.00</td><td>~$6,500</td></tr>
+      <tr><td><strong>GC</strong></td><td>Gold</td><td>COMEX</td><td>100 troy oz</td><td>$0.10</td><td>$10.00</td><td>~$11,500</td></tr>
+      <tr><td><strong>SI</strong></td><td>Silver</td><td>COMEX</td><td>5,000 troy oz</td><td>$0.005</td><td>$25.00</td><td>~$12,500</td></tr>
+      <tr><td><strong>HG</strong></td><td>Copper</td><td>COMEX</td><td>25,000 lbs</td><td>$0.0005</td><td>$12.50</td><td>~$7,000</td></tr>
+    </table>
+    <div class="callout"><strong class="k" style="color:var(--gold);">*Verify with your broker — specs change.</strong> Margins move with volatility (exchanges raise them in stress), tick values are fixed but contract multipliers occasionally aren't, and your broker can require <em>more</em> than exchange minimums. Always check the current spec sheet before trading a contract for the first time.</div>
+    <div class="callout tip"><strong class="k">Beginner on-ramp:</strong> <strong>micro</strong> contracts — MES (Micro E-mini S&amp;P) and MNQ (Micro E-mini Nasdaq) — are exactly <strong>one-tenth</strong> the size of ES/NQ. Same ticks, same behavior, one-tenth the P&amp;L per move. Learn the mechanics there before touching full size.</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Contango &amp; Backwardation</h2>
+    <p class="section-sub">Line up the same contract's expirations by date and you get the <strong>futures curve</strong>. Its shape tells you what the market expects — and it quietly taxes anyone who holds positions across rolls.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Contango — upward slope</h3>
+        <p>Farther-dated contracts cost <strong>more</strong> than near ones. Normal for commodities with storage costs (crude, natural gas): the market charges you for carrying. Rolling a long position in contango means <strong>selling low, buying high</strong> each roll — a steady bleed. In 2020, crude's curve went so steeply into contango that the front month briefly printed <em>negative</em>.</p>
+      </div>
+      <div class="card">
+        <h3>Backwardation — downward slope</h3>
+        <p>Farther-dated contracts cost <strong>less</strong> than near ones. Signals tight <em>current</em> supply — buyers pay up for barrels today. Rolling a long in backwardation means selling high and buying low: the curve <strong>pays you</strong> to hold. Equity index futures sit in mild contango most of the time (the cost of financing the position).</p>
+      </div>
+    </div>
+    <div class="callout gold"><strong class="k">Why an options trader should care:</strong> the futures curve is the market's voted forecast of carry, not of direction — but it sets the financing assumptions baked into option prices. And if you ever hedge an options book with futures, rolling that hedge through a steep contango is a real, recurring cost.</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>The Contracts on This Site's Radar</h2>
+    <p class="section-sub">These are the futures behind the market commentary here — the same ones on the homepage ticker.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>ES — E-mini S&amp;P 500</h3>
+        <p>The world's most traded equity future. The benchmark for "the market." Nearly 24-hour trading, deep liquidity, tight spreads. If you trade one future, it's this one.</p>
+      </div>
+      <div class="card">
+        <h3>NQ — E-mini Nasdaq-100</h3>
+        <p>Tech-heavy and twitchy: roughly 3–4× the point volatility of ES in dollar terms per contract. Bigger moves, bigger margin, bigger mistakes available.</p>
+      </div>
+      <div class="card">
+        <h3>YM — E-mini Dow</h3>
+        <p>The Dow future. Smaller notional than ES, straightforward $5-per-point math. A calmer on-ramp to index futures than NQ.</p>
+      </div>
+      <div class="card">
+        <h3>CL — WTI crude</h3>
+        <p>1,000 barrels of West Texas Intermediate per contract. Geopolitics in a ticker symbol: inventory reports Wednesdays, OPEC headlines anytime. $1 move = $1,000.</p>
+      </div>
+      <div class="card">
+        <h3>GC / SI — Gold &amp; Silver</h3>
+        <p>The classic fear gauges. Gold (100 oz/contract) trends; silver (5,000 oz) <em>lurches</em> — silver's percentage volatility routinely doubles gold's. Size silver positions smaller than the specs suggest.</p>
+      </div>
+      <div class="card">
+        <h3>HG — Copper</h3>
+        <p>"Dr. Copper" — the metal with a PhD in economics. Tightly linked to growth expectations and electrification demand; 25,000 lbs per contract.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2><span class="dot"></span>Key Risks for Beginners</h2>
+    <p class="section-sub">Read this twice before your first trade.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Leverage cuts both ways</h3>
+        <p>23-to-1 leverage means a 4–5% adverse move — routine a few times a year — erases the entire margin deposit. Futures have no "the premium was my max loss" safety rail. Your max loss is <em>theoretically</em> unbounded on a short.</p>
+      </div>
+      <div class="card">
+        <h3>Overnight gaps</h3>
+        <p>Futures trade nearly 24 hours, but <em>you</em> sleep. Weekend news, Asian-session shocks, and inventory reports can gap prices far past your stop. Stops become market orders in a gap — your fill is wherever the market reopens.</p>
+      </div>
+      <div class="card">
+        <h3>Daily settlement is real money</h3>
+        <p>Losses are debited <strong>every day</strong>, not at expiration. A position that's "fine if it comes back" still drains your account nightly and can trigger a margin call mid-drawdown.</p>
+      </div>
+      <div class="card">
+        <h3>Contract mix-ups</h3>
+        <p>Trading the wrong expiration, the wrong size (full vs micro), or holding into first notice day are classic beginner errors. Confirm the <strong>symbol, month, and size</strong> on every order ticket.</p>
+      </div>
+    </div>
+    <div class="callout warn"><strong class="k" style="color:var(--red);">The beginner's rule of thumb:</strong> risk only money you can afford to lose completely, start with micros, keep any single position small enough that a limit-move day doesn't end your account, and paper-trade the mechanics — especially rolling — before committing real capital.</div>
+  </div>
+</section>
+
+<section class="block" style="background:var(--bg2);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <h2><span class="dot"></span>Where to Go Next</h2>
+    <p class="section-sub">You now speak futures. Here's the recommended path:</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>1. Watch the ticker</h3>
+        <p>The homepage strip shows live ES, NQ, crude, gold, silver and copper. Start connecting price moves to the tick math above.</p>
+      </div>
+      <div class="card">
+        <h3>2. Learn the options side</h3>
+        <p>Futures options (options <em>on</em> ES, CL, GC) combine both worlds. The <a href="options-basics.html">Basics</a> page covers the mechanics; the <a href="strategies.html">Playbook</a> covers the selling.</p>
+      </div>
+      <div class="card">
+        <h3>3. Respect the leverage</h3>
+        <p>Read the <a href="rules.html">Rules</a> — position sizing is what keeps leveraged traders alive. The rules were written for options; they apply double to futures.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer"><strong>Disclaimer:</strong> OptionsWizard is an educational resource only — not financial advice, and not a recommendation to buy or sell any security. Futures trading involves substantial risk of loss, including the possible loss of more than your initial investment, and is not suitable for every investor. Contract specifications and margin requirements change over time — verify current specs with your broker. Past performance does not guarantee future results. Consult a qualified financial professional before trading.</div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a><a href="options-basics.html">Basics</a><a href="strategies.html">Playbook</a><a href="greeks.html">Greeks</a><a href="rules.html">Rules</a><a href="metrics.html">Metrics</a><a href="mistakes.html">Mistakes</a><a href="futures.html">Futures</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="tw/futures.html">中文版</a>
+    </nav>
+    <div class="copy">© 2026 OptionsWizard. Trade the odds, not the opinion.</div>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function() {
+  document.querySelector('.main-nav').classList.toggle('open');
+});
+</script>
+</body>
+</html>
