@@ -266,3 +266,25 @@ footer.site-footer {
   .spec-row { grid-template-columns: 1fr; gap: 2px; }
   ol.rules > li { padding: 18px 18px 18px 68px; }
 }
+
+/* ---------- Ad slots (Google AdSense placeholders) ---------- */
+/* display:none-safe: when hidden (no ad code yet, or an ad blocker),
+   the slot collapses cleanly without breaking the layout. */
+.ad-slot {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--bg2);
+  color: var(--muted);
+  margin: 28px auto;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.ad-slot .ad-label { display: block; margin-bottom: 4px; }
+.ad-slot .ad-unit { min-height: 0; }
+.ad-leaderboard { min-height: 110px; max-width: 970px; }
+.ad-inarticle { min-height: 280px; max-width: 728px; }
+.ad-slot.hidden { display: none; }

@@ -14,10 +14,15 @@ Static HTML + one shared stylesheet. No build step, no frameworks — GitHub Pag
 | `rules.html` | EN | The 16 mechanical rules (numbered), incl. VIX-scaled buying-power table |
 | `metrics.html` | EN | Key metrics: IV Rank (+formula), IV percentile, expected move, delta-as-probability, POP, probability of touch, BPR, beta-weighted delta, concentration |
 | `mistakes.html` | EN | Loser management (rolling the untested side, 21-DTE beats P/L stops), sizing as survival, 6 classic beginner mistakes |
-| `tw/*.html` | 繁體中文（台灣） | Full Traditional Chinese mirrors of all 7 pages (入門：選擇權入門；希臘字母：Delta/Gamma/Theta/Vega/Rho) |
+| `about.html` / `privacy.html` | EN | About: what the site is, who it's for, contact. Privacy: data collection (none), AdSense/DoubleClick cookies + opt-out links, analytics, children, contact |
+| `tw/about.html` / `tw/privacy.html` | 繁體中文（台灣） | 關於 / 隱私權政策：Traditional Chinese mirrors |
+| `tw/*.html` | 繁體中文（台灣） | Full Traditional Chinese mirrors of all 9 pages (入門：選擇權入門；希臘字母：Delta/Gamma/Theta/Vega/Rho；關於；隱私權政策) |
+| `ads.txt` | — | AdSense ads.txt with commented placeholder publisher ID (inactive until uncommented) |
 | `styles.css` | — | Shared stylesheet: dark finance theme, green/gold accents, sticky nav, mobile responsive |
 
-Nav order (all pages): Home, Basics, Playbook, Greeks, Rules, Metrics, Mistakes — TW: 首頁， 入門， 策略， 希臘字母， 規則， 指標， 誤區. Language switcher links to the same page in the other language.
+Nav order (all pages): Home, Basics, Playbook, Greeks, Rules, Metrics, Mistakes — TW: 首頁， 入門， 策略， 希臘字母， 規則， 指標， 誤區. Language switcher links to the same page in the other language. Footer (all pages): nav links + About/Privacy (關於/隱私權) + language mirror + disclaimer.
+
+Ad slots: every content page has a leaderboard slot below the nav (`.ad-leaderboard`) and an in-article slot mid-content (`.ad-inarticle`) — see `styles.css`. Each slot carries `<!-- Google AdSense: paste your ad unit code below this line -->` above an empty `.ad-unit` div; paste the real ad unit code there after AdSense approval.
 
 ## Conventions
 
