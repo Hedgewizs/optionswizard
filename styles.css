@@ -289,6 +289,36 @@ footer.site-footer {
 .ad-inarticle { min-height: 280px; max-width: 728px; }
 .ad-slot.hidden { display: none; }
 
+/* ---- House ad: bottom banner, high-visibility ---- */
+.house-ad {
+  margin: 40px auto 8px;
+  max-width: 970px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #f5b942, #e8930c);
+  color: #1a1206;
+  padding: 22px 28px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(232, 147, 12, 0.25);
+}
+.house-ad-label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+.house-ad-link {
+  display: inline-block;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1a1206;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(26, 18, 6, 0.4);
+}
+.house-ad-link:hover { border-bottom-color: #1a1206; }
+
 /* ---- Live market ticker strip ---- */
 .ticker-strip {
   background: var(--bg2);
