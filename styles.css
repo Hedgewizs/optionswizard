@@ -362,3 +362,13 @@ footer.site-footer {
   animation: blink 2s infinite;
 }
 @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* Book cards: image-left + abstract-right */
+.book-card{display:flex;gap:22px;align-items:flex-start;background:var(--card,#fff);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:18px}
+.book-cover{width:130px;flex-shrink:0;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,.18)}
+.book-info{flex:1;min-width:0}
+.book-info h3{margin:0 0 4px;font-size:1.15rem}
+.book-author{color:var(--muted);font-size:.88rem;margin:0 0 10px;font-style:italic}
+.book-info p{margin:0 0 12px;line-height:1.6}
+.book-info a{font-weight:700}
+@media(max-width:640px){.book-card{flex-direction:column;gap:14px}.book-cover{width:110px}}
